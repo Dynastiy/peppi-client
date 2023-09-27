@@ -1,0 +1,66 @@
+/* BUTTONS  */
+.peppi-btn {
+    border: none;
+    padding: 14px 12px;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.peppi-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+}
+
+/* INPUT  */
+.input-field {
+    border-width: 1px ;
+    border-color: var(--gray-400);
+    display: flex;
+    display: inline-flex;
+    display: -webkit-flex;
+    /* gap: 5px; */
+    font-size: 13px;
+    padding-left: 12px;
+    padding-right: 10px;
+    align-items: center;
+    /* border-radius: 5px; */
+}
+
+.input-field.error {
+    border-color: var(--error-300) !important;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 12px 0;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.input-field input::placeholder {
+    color: var(--gray-400);
+    font-weight: 300;
+    font-size: 13.5px;
+}
+
+.input-field .form-icon {
+    color: var(--gray-500);
+    font-size: 20px;
+}
+
+.input-field .form-icon {
+    color: var(--gray-400);
+}
+
+form label {
+    margin-bottom: 2px;
+    font-size: 13px;
+    font-weight: 400;
+}
