@@ -8,7 +8,7 @@
         <products-catalog-header />
         <hr class="tw-my-8">
         <div class="tw-pb-6 tw-grid lg:tw-grid-cols-3 md:tw-grid-cols-2 tw-grid-cols-1 tw-gap-8">
-            <product-card v-for="item in 12" :key="item"/>
+            <product-card v-for="item in 12" :key="item" :id="item"/>
         </div>
     </div>
   </div>

@@ -14,7 +14,7 @@
     <div class="tw-flex tw-flex-col tw-space-y-3 tw-items-center tw-mt-3">
       <span
         role="button"
-        @click="$router.push('/product/id')"
+        @click="$router.push(`/product/${id}`)"
         class="tw-block tw-uppercase tw-tracking-widest hover:tw-text-primary tw-ease-in-out tw-duration-1000"
         >hello world item</span
       >
@@ -32,7 +32,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props:{
+    id: {
+      type: Number
+    }
+  }
+};
 </script>
 
 <style></style>

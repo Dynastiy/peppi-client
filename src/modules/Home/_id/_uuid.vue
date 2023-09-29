@@ -8,10 +8,10 @@
       />
     </div>
     <div class="tw-flex tw-flex-col tw-space-y-4">
-      <h3 class="tw-tracking-widest tw-uppercase tw-font-light">
+      <h3 class="tw-tracking-widest tw-uppercase tw-mb-0 tw-text-lg tw-font-light">
         oak & iron coffee table
       </h3>
-      <h3>NGN 345.00</h3>
+      <h3 class="tw-text-lg tw-font-semibold">NGN 345.00</h3>
       <hr />
       <p class="tw-text-gray-500 tw-text-[13px] tw-font-light">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis,

@@ -4,8 +4,9 @@
     <div
       class="tw-bg-white lg:tw-shadow-lg md:tw-shadow-lg tw-shadow-sm tw-rounded-md"
     >
-      <div class="tw-px-8">
+      <div class="lg:tw-px-8 md:tw-px-7 tw-px-5">
         <app-header :menu="menu" @toggleDrawer="toggleDrawer"/>
+        <page-header v-if="!routeHome"/>
       <slot />
       </div>
       <app-footer />
@@ -20,8 +21,9 @@ import TopHeader from "@/components/Navigation/TopHeader.vue";
 import AppHeader from "@/components/Navigation/AppHeader.vue";
 import AppFooter from '@/components/Navigation/AppFooter.vue';
 import MobileHomeDrawer from '@/components/Navigation/MobileHomeDrawer.vue';
+import PageHeader from '@/components/Headers/PageHeader.vue';
 export default {
-  components: { TopHeader, AppHeader, AppFooter, MobileHomeDrawer },
+  components: { TopHeader, AppHeader, AppFooter, MobileHomeDrawer, PageHeader },
   name: "AppHomeLayout",
   data() {
     return {
@@ -67,6 +69,12 @@ export default {
     toggleDrawer(){
       this.drawer = !this.drawer
     },
+  },
+
+  computed: {
+    routeHome(){
+      return this.$route.name === 'home'
+    }
   }
 };
 </script>

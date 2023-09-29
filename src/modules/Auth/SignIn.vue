@@ -135,7 +135,7 @@ export default {
         password: this.credentials.password,
       };
       console.log(credentials);
-      this.$router.push('/user')
+      this.$router.push('/account')
       // this.loginUser(credentials)
     },
   },

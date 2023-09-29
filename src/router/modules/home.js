@@ -16,13 +16,24 @@ const router = [
   },
 
   {
-    path: "/product/id",
+    path: "/product/:id",
     name: "product-details",
     component: ProductDetails,
     meta: {
       layout: "AppHomeLayout",
       parent: "home",
       name: "product-details",
+      header: "product details",
+      breadcrumb: [
+        {
+          text: "home",
+          icon: "iconoir:home",
+          href: "/",
+        },
+        {
+          text: "product",
+        },
+      ],
     },
   },
 
@@ -34,6 +45,17 @@ const router = [
       layout: "AppHomeLayout",
       parent: "home",
       name: "cart",
+      header: "Cart",
+      breadcrumb: [
+        {
+          text: "home",
+          icon: "iconoir:home",
+          href: "/",
+        },
+        {
+          text: "cart",
+        },
+      ],
     },
   },
 
