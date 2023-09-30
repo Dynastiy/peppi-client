@@ -18,7 +18,7 @@
 
 /* INPUT  */
 .input-field {
-    border-width: 1px ;
+    border-width: 1px;
     border-color: var(--gray-400);
     display: flex;
     display: inline-flex;
@@ -63,4 +63,46 @@ form label {
     margin-bottom: 2px;
     font-size: 13px;
     font-weight: 400;
+}
+
+
+/* Navs and Tabs */
+.custom-card-tabs.nav,
+.custom-card-tabs .nav {
+    padding: 0px !important;
+    border-bottom: 1px solid #f2f4f7;
+    flex-wrap: wrap;
+    
+    overflow: auto;
+}
+
+.custom-card-tabs {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.custom-card-tabs .nav-item {
+    border-right: 1px solid var(--secondary-900);
+}
+
+.custom-card-tabs .nav-link {
+    font-size: 12.7px;
+    line-height: 100%;
+    color: #5f656a;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0rem 0.4rem 0.6rem 0.8rem;
+    white-space: nowrap;
+    background-color: #8f9aa315;
+}
+
+.custom-card-tabs .nav-link:hover {
+    color: var(--dark-100);
+}
+
+.custom-card-tabs .nav-link.active {
+    color: var(--white-50);
+    background-color: var(--primary);
+    border-bottom: 2px solid var(--dark-100);
+    /* padding: 10px 15px; */
 }

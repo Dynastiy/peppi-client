@@ -12,7 +12,7 @@ const router = [
     component: IndexViewVue,
     meta: {
       layout: "AppHomeLayout",
-      parent: "user",
+      parent: "account",
       name: "user-home",
       header: "my account",
       breadcrumb: [
@@ -34,7 +34,7 @@ const router = [
         component: ProfileView,
         meta: {
           layout: "AppHomeLayout",
-          parent: "user",
+          parent: "account",
           name: "user-home",
           header: "my account",
           breadcrumb: [
@@ -55,7 +55,7 @@ const router = [
         component: HistoryView,
         meta: {
           layout: "AppHomeLayout",
-          parent: "user",
+          parent: "account",
           name: "user-home",
           header: "my account",
           breadcrumb: [
@@ -77,7 +77,7 @@ const router = [
         component: NotificationsView,
         meta: {
           layout: "AppHomeLayout",
-          parent: "user",
+          parent: "account",
           name: "user-home",
           header: "my account",
           breadcrumb: [
@@ -99,7 +99,7 @@ const router = [
         component: AccountManagement,
         meta: {
           layout: "AppHomeLayout",
-          parent: "user",
+          parent: "account",
           name: "user-home",
           header: "my account",
           breadcrumb: [

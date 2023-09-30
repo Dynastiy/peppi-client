@@ -4,7 +4,7 @@
       <div class=" tw-w-full">
         <user-side-drawer />
       </div>
-      <div class="tw-bg-white lg:tw-col-span-2 md:tw-col-span-2 tw-p-6 tw-border tw-border-gray200 tw-w-full">
+      <div class="tw-bg-white lg:tw-col-span-2 md:tw-col-span-2 tw-p-4 tw-border tw-border-gray200 tw-w-full">
         <router-view />
       </div>
     </div>

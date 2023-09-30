@@ -20,7 +20,8 @@
       <li v-for="item in userMenu" :key="item?.id">
         <router-link
           :to="item?.url"
-          class="tw-flex tw-space-x-2 tw-items-center tw-no-underline tw-text-dark-100 tw-text-[13px] tw-w-full hover:tw-bg-gray200 tw-py-3 tw-px-5 tw-uppercase tw-tracking-widest">
+          class="tw-flex tw-space-x-2 tw-items-center tw-no-underline tw-text-dark-100 tw-text-[13px] tw-w-full hover:tw-bg-gray200 tw-py-3 tw-px-5 tw-uppercase tw-tracking-widest"
+        >
           <i-icon :icon="item?.icon" />
           <span>{{ item?.title }}</span>
         </router-link>
@@ -34,27 +35,27 @@ export default {
   data() {
     return {
       userMenu: [
-      {
-          id: 3,
+        {
+          id: 1,
           title: "Profile",
           icon: "ri:user-line",
           url: "/account/index",
         },
 
         {
-          id: 1,
+          id: 2,
           title: "History",
           icon: "material-symbols:history",
           url: "/account/history",
         },
 
         {
-          id: 2,
+          id: 3,
           title: "Notifications",
           icon: "ion:notifications-outline",
           url: "/account/notifications",
         },
-        
+
         {
           id: 4,
           title: "Account Management",
@@ -69,7 +70,7 @@ export default {
 
 <style>
 .user-drawer .router-link-exact-active {
-    background: var(--gray-200);
-    font-weight: 600
+  background: var(--gray-200);
+  font-weight: 600;
 }
 </style>
