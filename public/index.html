@@ -1,21 +1,57 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link href="https://unpkg.com/nprogress@0.2.0/nprogress.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
 
-    <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
-    <!-- built files will be auto injected -->
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link href="https://unpkg.com/nprogress@0.2.0/nprogress.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+
+    .pre-loader img {
+      width: 100px;
+    }
+
+    .pre-loader {
+      display: grid;
+      display: -moz-grid;
+      display: -ms-grid;
+      height: 100vh;
+      place-items: center;
+    }
+
+    
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript>
+  <div id="app">
+    <div id="loading__container" class="pre-loader">
+      <div class="" style="text-align: center;">
+        <img src="/peppi-icon.png" alt="">
+        <!-- <h4 class="" style="margin-bottom: 0; font-weight: bold;">Welcome to Warehauze</h4> -->
+        <!-- <p style="font-size: 12px;"> <i>Trading Pi has never been easier...</i></p> -->
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>

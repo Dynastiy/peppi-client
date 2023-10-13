@@ -17,17 +17,25 @@
       <div class="tw-hidden lg:tw-block md:tw-block">
         <span class="tw-tracking-widest">welcome to peppy stores</span>
       </div>
-      <div class="tw-flex tw-space-x-2">
+      <div class="tw-flex tw-space-x-2" v-if="!isLoggedIn">
         <router-link class="tw-tracking-wider" to="/sign-in">sign in</router-link>
         <span>/</span>
         <router-link class="tw-tracking-wider" to="/sign-up">sign up</router-link>
       </div>
+      <router-link v-else class="tw-tracking-wider" to="/">logout</router-link>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    isLoggedIn(){
+      const accessToken = localStorage.getItem('token')
+      return accessToken
+    }
+  }
+};
 </script>
 
 <style>

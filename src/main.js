@@ -64,6 +64,12 @@ import vSelect from "vue-select";
 Vue.component("v-select", vSelect);
 import "vue-select/dist/vue-select.css";
 
+import $request from '@/http/axios'
+Vue.prototype.$request = $request
+
+import toastify from "toastify-js";
+import "toastify-js/src/toastify.css"
+Vue.prototype.$toastify = toastify
 
 new Vue({
   router,

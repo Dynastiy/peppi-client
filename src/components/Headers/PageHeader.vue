@@ -5,7 +5,7 @@
     >
       {{ headerText }}
     </h4>
-    <div class="tw-flex tw-justify-center tw-mt-4">
+    <div class="tw-flex tw-justify-center tw-mt-4 tw-pl-4" v-if="breadCrumbList.length > 0">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item
           v-for="(breadcrumb, idx) in breadCrumbList"
@@ -27,31 +27,45 @@ export default {
   },
 
   methods: {
-    updateList() {
-      var currentBreadCrumb = this.$route.meta.breadcrumb;
-      var val = this.$route.params;
-      console.log(val);
-      if (Object.keys(val).length > 0) {
-        console.log(val.id);
-        let breadcrumb = {
-          text: val.id,
-        };
-        console.log(breadcrumb);
-        currentBreadCrumb.push(breadcrumb);
-        this.breadCrumbList = currentBreadCrumb
-      } else {
-        this.breadCrumbList = currentBreadCrumb;
+    updateList(val) {
+      var currentBreadCrumb = []
+      currentBreadCrumb = this.$route.meta.breadcrumb;
+      // var val = this.$route.params;
+      // console.log(val);
+      // if (Object.keys(val).length > 0) {
+      //   console.log(val.id);
+      //   let breadcrumb = {
+      //     text: val.id,
+      //   };
+      //   console.log(breadcrumb);
+      if(currentBreadCrumb.length > 2) {
+        currentBreadCrumb.pop()
       }
+      
+      currentBreadCrumb.push(val);
+      this.breadCrumbList = currentBreadCrumb;
+      // } else {
+      //   this.breadCrumbList = currentBreadCrumb;
+      // }
     },
   },
 
   beforeMount() {
-    this.updateList();
+    // this.updateList();
+    console.log(this.$route);
   },
 
   watch: {
-    $route() {
-      this.updateList();
+    "$route.params": {
+      handler(val) {
+        if (val.id) {
+          let breadcrumb = {
+            text: val.id,
+          };
+          this.updateList(breadcrumb);
+        }
+      },
+      immediate: true,
     },
   },
 

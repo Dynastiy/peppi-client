@@ -3,6 +3,9 @@ import IndexViewVue from "@/modules/Home/IndexView.vue";
 import CartView from "@/modules/Home/CartView.vue";
 import ProductDetails from "@/modules/Home/_id/_uuid.vue"
 
+import Categories from "@/modules/Home/CategoriesPage.vue"
+import ContactUs from "@/modules/Home/ContactPage.vue"
+
 const router = [
   {
     path: "/",
@@ -34,6 +37,30 @@ const router = [
           text: "product",
         },
       ],
+    },
+  },
+
+  {
+    path: "/categories",
+    name: "categories",
+    component: Categories,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "categories",
+      name: "categories",
+      header: "categories",
+    },
+  },
+
+  {
+    path: "/contact-us",
+    name: "contact-us",
+    component: ContactUs,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "contact-us",
+      name: "contact-us",
+      header: "contact us",
     },
   },
 

@@ -27,8 +27,8 @@
               >
                 <input
                   type="text"
-                  name="text"
-                  id="username"
+                  name="username"
+                  id="email"
                   v-model="credentials.username"
                   placeholder="username"
                 />
@@ -86,7 +86,7 @@
             <button
               class="peppi-btn peppi-primary w-100"
               v-bind:disabled="invalid"
-              :class="{ 'tw-bg-gray-400': invalid }"
+              :class="{ 'tw-bg-gray-400': invalid || loading }"
             >
               <span>Sign in</span>
             </button>
@@ -113,47 +113,46 @@
 </template>
 
 <script>
-// import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   components: {},
   data: () => {
     return {
       credentials: {
-        email: "",
+        username: "",
         password: "",
-        username: ""
       },
       typePassword: true,
     };
   },
   methods: {
-    // ...mapActions("auth", ["loginUser"]),
+    ...mapActions("auth", ["loginUser"]),
 
     onSubmit() {
       let credentials = {
-        email: this.credentials.email,
+        login: this.credentials.username,
         password: this.credentials.password,
       };
       console.log(credentials);
-      this.$router.push('/account')
-      // this.loginUser(credentials)
+      // this.$router.push('/account')
+      this.loginUser(credentials)
     },
   },
 
   mounted() {
-    // this.$store.commit("auth/REMOVE_ERROR_SUCCESS");
+    this.$store.commit("auth/REMOVE_ERROR_SUCCESS");
   },
 
   watch: {},
 
   computed: {
-    // ...mapState("auth", {
-    //   loading: (state) => state.loading,
-    //   error: (state) => state.error,
-    //   errors: (state) => state.validationErrors,
-    //   user: (state) => state.user,
-    //   success: (state) => state.success,
-    // }),
+    ...mapState("auth", {
+      loading: (state) => state.loading,
+      error: (state) => state.error,
+      errors: (state) => state.validationErrors,
+      user: (state) => state.user,
+      success: (state) => state.success,
+    }),
   },
 };
 </script>

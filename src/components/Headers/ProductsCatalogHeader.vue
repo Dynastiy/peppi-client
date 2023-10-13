@@ -2,10 +2,23 @@
   <div
     class="tw-grid lg:tw-grid-cols-2 tw-gap-2 lg:tw-grid-cols-2 tw-justify-between tw-items-center"
   >
-    <span
+  <b-skeleton-wrapper :loading="loading">
+        <template #loading>
+          <b-skeleton width="40%" ></b-skeleton>
+        </template>
+        <span
       class="tw-full tw-text-sm tw-uppercase tw-tracking-widest tw-text-dark-100"
-      >showing 1 - 10 of 23 results</span
+      >showing {{ from }} - {{ to }} of {{ total }} results
+      <!-- Showing {{ ((currentPage - 1) * perPage) + items.length }} / {{ totalRecords }} -->
+      
+      </span
     >
+        
+      </b-skeleton-wrapper>
+    
+
+    
+
 
     <div class="tw-flex tw-justify-end tw-full">
       <el-dropdown
@@ -38,6 +51,24 @@
 
 <script>
 export default {
+  props: {
+    total: {
+      default: "0",
+      type: String
+    },
+    to: {
+      default: "0",
+      type: String
+    },
+    from: {
+      default: "0",
+      type: String
+    },
+    loading: {
+      default: false,
+      type: Boolean
+    }
+  },
   data() {
     return {
       filterParams: [

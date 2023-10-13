@@ -3,45 +3,54 @@
     <div>
       <div class="tw-mb-6">
         <img src="@/assets/img/peppi-icon.svg" class="tw-h-12 tw-w-12" alt="" />
-        <h5 class="tw-font-bold tw-text-2xl tw-mb-0">Welcome back,</h5>
+        <h5 class="tw-font-bold tw-text-2xl tw-mb-0">Create Account</h5>
         <small class="tw-text-light tw-text-xs"
-          >Sign in to continue to Peppy Stores</small
+          >Create new user account on peppy stores</small
         >
       </div>
       <validation-observer v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(onSubmit)">
-          <span v-if="error" class="tw-mb-2 error-alert">{{ error }}</span>
+          <span v-if="errorMsg" class="tw-mb-2 tw-text-xs tw-text-red-600">*{{
+            errorMsg
+          }}</span>
 
           <div>
             <validation-provider
-            name="username"
-            rules="required"
-            v-slot="{ dirty, valid, invalid, errors }"
-          >
-            <label for="username">Username</label>
-            <div class="input-field" :class="{
-              'error': dirty && invalid,
-              'success': dirty && valid,
-            }">
-              <input
-                type="text"
-                name="text"
-                id="username"
-                v-model="credentials.username"
-                placeholder="username"
-              />
-              <span
-                class="email-iccon"
+              name="username"
+              rules="required"
+              v-slot="{ dirty, valid, invalid, errors }"
+            >
+              <label for="username">Username</label>
+              <div
+                class="input-field"
+                :class="{
+                  error: dirty && invalid,
+                  success: dirty && valid,
+                }"
               >
-                <i-icon icon="heroicons:user" class="form-icon" />
-              </span>
-            </div>
-            <span class="tw-text-xs tw-text-red-600" v-if="errors">{{
-              errors[0]
-            }}</span>
-          </validation-provider>
+                <input
+                  type="text"
+                  name="text"
+                  id="username"
+                  v-model="credentials.username"
+                  placeholder="username"
+                />
+                <span class="email-iccon">
+                  <i-icon icon="heroicons:user" class="form-icon" />
+                </span>
+              </div>
+              <span class="tw-text-xs tw-text-red-600" v-if="errors">{{
+                errors[0]
+              }}</span>
+            </validation-provider>
+            <span
+              class="tw-text-xs tw-text-red-600"
+              v-for="item in error.username"
+              :key="item"
+              >{{ item }}</span
+            >
           </div>
-          
+
           <div class="tw-my-3">
             <validation-provider
               name="email"
@@ -70,49 +79,60 @@
                 errors[0]
               }}</span>
             </validation-provider>
+            <span
+              class="tw-text-xs tw-text-red-600"
+              v-for="item in error.email"
+              :key="item"
+              >{{ item }}</span
+            >
           </div>
 
-        <div class="tw-mb-3">
-          <validation-provider
-            class=""
-            name="password"
-            rules="required"
-            v-slot="{ dirty, valid, invalid, errors }"
-          >
-            <label for="password">Password</label>
-            <div class="input-field" :class="{
-              'error': dirty && invalid,
-              'success': dirty && valid,
-            }">
-              <input
-                :type="typePassword ? 'password' : 'text'"
-                name="password"
-                id="password"
-                v-model="credentials.password"
-                placeholder="Password"
-              />
-              <span
-                class="password-iccon"
-                role="button"
-                @click="typePassword = !typePassword"
+          <div class="tw-mb-3">
+            <validation-provider
+              class=""
+              name="password"
+              rules="required"
+              v-slot="{ dirty, valid, invalid, errors }"
+            >
+              <label for="password">Password</label>
+              <div
+                class="input-field"
+                :class="{
+                  error: dirty && invalid,
+                  success: dirty && valid,
+                }"
               >
-                <i-icon
-                  :icon="typePassword ? 'tabler:eye' : 'gridicons:not-visible'"
-                  class="form-icon"
+                <input
+                  :type="typePassword ? 'password' : 'text'"
+                  name="password"
+                  id="password"
+                  v-model="credentials.password"
+                  placeholder="Password"
                 />
-              </span>
-            </div>
-            <span class="tw-text-xs tw-text-red-600" v-if="errors">{{
-              errors[0]
-            }}</span>
-          </validation-provider>
-        </div>
+                <span
+                  class="password-iccon"
+                  role="button"
+                  @click="typePassword = !typePassword"
+                >
+                  <i-icon
+                    :icon="
+                      typePassword ? 'tabler:eye' : 'gridicons:not-visible'
+                    "
+                    class="form-icon"
+                  />
+                </span>
+              </div>
+              <span class="tw-text-xs tw-text-red-600" v-if="errors">{{
+                errors[0]
+              }}</span>
+            </validation-provider>
+          </div>
 
           <div class="tw-mt-4">
             <button
               class="peppi-btn peppi-primary w-100"
               v-bind:disabled="invalid"
-              :class="{ 'tw-bg-gray-400': invalid }"
+              :class="{ 'tw-bg-gray-400': invalid || loading }"
             >
               <span>Sign Up</span>
             </button>
@@ -139,7 +159,7 @@
 </template>
 
 <script>
-// import { mapActions, mapState } from "vuex";
+// import { mapActions } from "vuex";
 export default {
   components: {},
   data: () => {
@@ -147,9 +167,12 @@ export default {
       credentials: {
         email: "",
         password: "",
-        username:""
+        username: "",
       },
       typePassword: true,
+      loading: false,
+      error: {},
+      errorMsg: "",
     };
   },
   methods: {
@@ -158,11 +181,35 @@ export default {
     onSubmit() {
       let credentials = {
         email: this.credentials.email,
+        username: this.credentials.username,
         password: this.credentials.password,
       };
       console.log(credentials);
-      this.$router.push('/sign-in')
-      // this.loginUser(credentials)
+
+      this.error = {};
+      this.errorMsg = "";
+      this.$request
+        .post("/auth/signup", credentials)
+        .then((res) => {
+          console.log(res);
+          this.$toastify({
+            text: `Welcome back`,
+            className: "info",
+            position: "center",
+            style: {
+              background: "#333",
+              fontSize: "12px",
+              borderRadius: "5px",
+            },
+          }).showToast();
+          this.$router.push('/sign-in')
+        })
+        .catch((err) => {
+          let errPayload = err.data;
+          console.log(err.data);
+          this.errorMsg = errPayload.message;
+          this.error = errPayload.errors;
+        });
     },
   },
 
