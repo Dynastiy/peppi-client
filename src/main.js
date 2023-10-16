@@ -71,6 +71,23 @@ import toastify from "toastify-js";
 import "toastify-js/src/toastify.css"
 Vue.prototype.$toastify = toastify
 
+import StarRating from 'vue-star-rating'
+Vue.component("star-rating", StarRating);
+
+// vue-sweetalert2
+import VueSweetalert2 from "vue-sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+Vue.use(VueSweetalert2, {
+  confirmButtonColor: "#41b882",
+  cancelButtonColor: "#ff7674",
+  reverseButtons: false,
+  buttonsStyling: true,
+  customClass: {
+    confirmButton: "tw-bg-green-600 tw-text-white tw-py-3",
+    cancelButton: "tw-bg-red-600 tw-text-white tw-py-3",
+  },
+});
+
 new Vue({
   router,
   store,

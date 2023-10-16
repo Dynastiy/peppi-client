@@ -132,7 +132,7 @@ export default {
           className: "info",
           position: "center",
           style: {
-            background: "green",
+            background: "#333",
             fontSize: "12px",
             borderRadius: "5px",
           },

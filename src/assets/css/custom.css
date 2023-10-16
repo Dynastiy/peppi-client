@@ -171,8 +171,8 @@ form label {
 .tag.S,
 .tag.T,
 .tag.U {
-    background-color: #26A4FF;
-    color: #fff;
+    background-color: #26a5ff2e;
+    color: #000;
 }
 
 .tag.v,
@@ -187,4 +187,45 @@ form label {
 .tag.Z {
     background-color: rgb(11, 100, 11);
     color: #fff;
+}
+
+/* EL Tabs 
+ */
+
+
+.el-tabs__item.is-active {
+    color: var(--primary) !important;
+}
+
+.el-tabs__item:hover {
+    color: var(--primary) !important;
+}
+
+.el-tabs__active-bar {
+    background-color: var(--primary) !important;
+}
+
+#reviews .el-tabs__item {
+    font-size: 20px !important;
+    font-weight: 700;
+}
+
+
+
+/* N Progress  */
+#nprogress .bar {
+    height: 4px;
+    background: var(--primary);
+}
+
+#nprogress .spinner-icon {
+    border-top-color: var(--primary);
+    border-left-color: var(--primary);
+    width: 30px;
+    height: 30px;
+    display: none;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px var(--primary), 0 0 5px var(--primary);
 }

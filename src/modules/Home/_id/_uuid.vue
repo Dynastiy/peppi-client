@@ -14,7 +14,11 @@
           <div>
             <b-skeleton width="40%"></b-skeleton>
             <b-skeleton width="40%" style="margin: 20px 0"></b-skeleton>
-            <b-skeleton width="100%" height="1px" style="margin: 10px 0"></b-skeleton>
+            <b-skeleton
+              width="100%"
+              height="1px"
+              style="margin: 10px 0"
+            ></b-skeleton>
             <div class="tw-flex tw-gap-4">
               <div v-for="item in 4" :key="item">
                 <b-skeleton-img
@@ -42,9 +46,21 @@
                 ></b-skeleton-img>
               </div>
             </div>
-            <b-skeleton width="100%" height="45px" style="margin: 20px 0"></b-skeleton>
-            <b-skeleton width="100%" height="45px" style="margin: 20px 0"></b-skeleton>
-            <b-skeleton width="100%" height="45px" style="margin: 20px 0"></b-skeleton>
+            <b-skeleton
+              width="100%"
+              height="45px"
+              style="margin: 20px 0"
+            ></b-skeleton>
+            <b-skeleton
+              width="100%"
+              height="45px"
+              style="margin: 20px 0"
+            ></b-skeleton>
+            <b-skeleton
+              width="100%"
+              height="45px"
+              style="margin: 20px 0"
+            ></b-skeleton>
           </div>
         </div>
       </template>
@@ -109,8 +125,20 @@
                 </span>
               </span>
             </div>
-            <div>
-              <el-collapse accordion>
+          </div>
+        </div>
+        <div class="tw-mt-5" id="reviews">
+          <el-tabs v-model="activeTab">
+            <el-tab-pane
+              v-for="(item, index) in tabs"
+              :key="index"
+              :name="index.name === 'reviews' ? `${index.name}(${product.reviews.length})` : index.name "
+              :label="item.title"
+            >
+              <component :item="product" @reloadData="getProduct" :is="tabs[index].component" />
+            </el-tab-pane>
+          </el-tabs>
+          <!-- <el-collapse accordion>
                 <el-collapse-item
                   v-for="(item, index) in tabs"
                   :key="index"
@@ -126,9 +154,7 @@
                     <component :item="product" :is="tabs[index].component" />
                   </div>
                 </el-collapse-item>
-              </el-collapse>
-            </div>
-          </div>
+              </el-collapse> -->
         </div>
       </template>
     </b-skeleton-wrapper>
@@ -144,21 +170,24 @@ export default {
   components: { AdditionalInformation, ProductReviews, ProductDescription },
   data() {
     return {
-      activeName: "1",
+      activeTab: "",
       tabs: [
         {
           id: 1,
           title: "Description",
+          name: "description",
           component: ProductDescription,
         },
         {
           id: 2,
           title: "Additional Information",
+          name: "additional-information",
           component: AdditionalInformation,
         },
         {
           id: 3,
-          title: "Reviews (2)",
+          title: "Reviews",
+          name: "reviews",
           component: ProductReviews,
         },
       ],
@@ -183,10 +212,26 @@ export default {
           this.isLoading = false;
         });
     },
+
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
   },
 
   beforeMount() {
     this.getProduct();
+  },
+
+  watch: {
+    activeName(val) {
+      this.activeTab = val;
+    },
+  },
+
+  computed: {
+    activeName() {
+      return this.tabs[0].name;
+    },
   },
 };
 </script>
