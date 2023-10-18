@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 // Modules
 import auth from "./modules/auth"
+import cart from "./modules/cart"
 
 import createPersistedState from "vuex-persistedstate";
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    auth
+    auth,
+    cart
   },
 });

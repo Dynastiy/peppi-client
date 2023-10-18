@@ -19,12 +19,19 @@
       </div>
 
       <div class="tw-justify-self-end">
-        <div class="tw-flex tw-items-center tw-space-x-8">
-          <span class="tw-relative tw-w-fit tw-block">
+        <div class="tw-flex tw-items-center tw-space-x-6">
+          <span class="tw-relative tw-w-fit tw-block" role="button" @click="$router.push('/account/saved-items').catch(()=>{})">
+            <i-icon icon="icon-park-outline:like" width="20px" />
+            <span
+              class="tw-absolute tw-bg-primary tw-block tw-h-5 tw-w-5 tw-rounded-lg -tw-top-3 -tw-right-3 tw-text-[10px] tw-font-semibold tw-flex tw-items-center tw-justify-center"
+              >{{ wishlist.length }}</span
+            >
+          </span>
+          <span class="tw-relative tw-w-fit tw-block" role="button" @click="$router.push('/cart').catch(()=>{})">
             <i-icon icon="heroicons:shopping-bag" width="20px" />
             <span
               class="tw-absolute tw-bg-primary tw-block tw-h-5 tw-w-5 tw-rounded-lg -tw-top-3 -tw-right-3 tw-text-[10px] tw-font-semibold tw-flex tw-items-center tw-justify-center"
-              >25</span
+              >{{ cart.length }}</span
             >
           </span>
           <span
@@ -74,6 +81,14 @@ export default {
   computed: {
     routeParent(){
       return this.$route.meta.parent
+    },
+
+    cart(){
+      return this.$store.getters['cart/getCartItems']
+    },
+
+    wishlist(){
+      return this.$store.getters['cart/getWishlistItems']
     }
   }
 };

@@ -3,6 +3,8 @@ import ProfileView from "@/modules/User/ProfileView.vue";
 import HistoryView from "@/modules/User/HistoryView.vue";
 import NotificationsView from "@/modules/User/NotificationView.vue"
 import AccountManagement from "@/modules/User/AccountManagement.vue"
+import WishlistView from "@/modules/User/WishlistView.vue";
+
 
 const router = [
   {
@@ -115,6 +117,27 @@ const router = [
         },
       },
 
+      {
+        path: "saved-items",
+        name: "user-wishlist",
+        component: WishlistView,
+        meta: {
+          layout: "AppHomeLayout",
+          parent: "account",
+          name: "user-home",
+          header: "my account",
+          breadcrumb: [
+            {
+              text: "home",
+              icon: "iconoir:home",
+              href: "/",
+            },
+            {
+              text: "wishlist",
+            },
+          ],
+        },
+      },
 
     ],
   },

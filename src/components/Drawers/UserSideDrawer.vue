@@ -44,20 +44,27 @@ export default {
 
         {
           id: 2,
+          title: "Saved Items",
+          icon: "icon-park-outline:like",
+          url: "/account/saved-items",
+        },
+
+        {
+          id: 3,
           title: "History",
           icon: "material-symbols:history",
           url: "/account/history",
         },
 
         {
-          id: 3,
+          id: 4,
           title: "Notifications",
           icon: "ion:notifications-outline",
           url: "/account/notifications",
         },
 
         {
-          id: 4,
+          id: 5,
           title: "Account Management",
           icon: "ri:user-settings-line",
           url: "/account/account-management",

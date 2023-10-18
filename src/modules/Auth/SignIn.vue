@@ -136,7 +136,15 @@ export default {
       console.log(credentials);
       // this.$router.push('/account')
       this.loginUser(credentials)
+      .then(()=> {
+        this.getUserCatalog()
+      })
     },
+
+    getUserCatalog(){
+      this.$store.dispatch('cart/getUserCart')
+      this.$store.dispatch('cart/getUserWishlist')
+    }
   },
 
   mounted() {

@@ -12,8 +12,15 @@ export default {
     console.log(this.isOnline, "ommo");
   },
 
-  watch: {
-    
+  methods: {
+    getUserCatalog(){
+      this.$store.dispatch('cart/getUserCart')
+      this.$store.dispatch('cart/getUserWishlist')
+    }
+  },
+
+  beforeMount(){
+    this.getUserCatalog()
   },
 
   computed: {

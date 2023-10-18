@@ -37,6 +37,7 @@
             v-for="(item, idx) in products"
             :key="idx"
             :item="item"
+            @reloadData="getProducts"
           />
         </div>
       </b-skeleton-wrapper>
