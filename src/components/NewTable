@@ -1,0 +1,17 @@
+ <!-- Component -->
+    <table>
+      <thead>
+        <tr>
+          <td v-for="(label, labelIndex) in labels" :key="labelIndex">
+            {{ label.text }}
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, itemIndex) in data" :key="itemIndex">
+          <td v-for="(label, labelIndex) in labels" :key="labelIndex">
+            {{ item[label.field] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>

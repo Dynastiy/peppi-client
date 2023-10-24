@@ -17,6 +17,7 @@ const router = [
       parent: "account",
       name: "user-home",
       header: "my account",
+      requiresAuth: true,
       breadcrumb: [
         {
           text: "home",

@@ -2,23 +2,16 @@
   <div
     class="tw-grid lg:tw-grid-cols-2 tw-gap-2 lg:tw-grid-cols-2 tw-justify-between tw-items-center"
   >
-  <b-skeleton-wrapper :loading="loading">
-        <template #loading>
-          <b-skeleton width="40%" ></b-skeleton>
-        </template>
-        <span
-      class="tw-full tw-text-sm tw-uppercase tw-tracking-widest tw-text-dark-100"
-      >showing {{ from }} - {{ to }} of {{ total }} results
-      <!-- Showing {{ ((currentPage - 1) * perPage) + items.length }} / {{ totalRecords }} -->
-      
-      </span
-    >
-        
-      </b-skeleton-wrapper>
-    
-
-    
-
+    <b-skeleton-wrapper :loading="loading">
+      <template #loading>
+        <b-skeleton width="40%"></b-skeleton>
+      </template>
+      <span
+        class="tw-full tw-text-sm tw-uppercase tw-tracking-widest tw-text-dark-100"
+        >showing {{ from }} - {{ to }} of {{ total }} result{{ total > 1 ? "s": "" }}
+        <!-- Showing {{ ((currentPage - 1) * perPage) + items.length }} / {{ totalRecords }} -->
+      </span>
+    </b-skeleton-wrapper>
 
     <div class="tw-flex tw-justify-end tw-full">
       <el-dropdown
@@ -54,20 +47,20 @@ export default {
   props: {
     total: {
       default: "0",
-      type: String
+      type: String,
     },
     to: {
       default: "0",
-      type: String
+      type: String,
     },
     from: {
       default: "0",
-      type: String
+      type: String,
     },
     loading: {
       default: false,
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -79,7 +72,7 @@ export default {
         { id: 5, title: "sort by price: high to low", active: false },
         { id: 6, title: "sort by price: low to high", active: false },
       ],
-      active: {}
+      active: {},
     };
   },
 
@@ -95,7 +88,7 @@ export default {
   watch: {
     selected: {
       handler(newVal) {
-        this.active = newVal
+        this.active = newVal;
       },
       deep: true,
       immediate: true,

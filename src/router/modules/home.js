@@ -73,6 +73,7 @@ const router = [
       parent: "home",
       name: "cart",
       header: "Cart",
+      requiresAuth: true,
       breadcrumb: [
         {
           text: "home",
@@ -85,8 +86,6 @@ const router = [
       ],
     },
   },
-
-
 ];
 
 export default router;

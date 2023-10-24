@@ -125,7 +125,24 @@ export default {
         commit("SET_SUCCESS", "Logged In");
 
         // Check redirect URL
-        router.push('/account/index')
+         const url = window.location.search
+         console.log(url)
+         const params = new URLSearchParams(url)
+        //  const q = params.get('return_url')
+         const d = params.get('redirectFrom')
+         console.log(d);
+
+        //  if (q === '/cart') {
+        //    const data = JSON.parse(localStorage.getItem('cart_details'))
+        //    dispatch('addToCart', data)
+        //    dispatch('setUser')
+        //    router.push(q)
+        //  } else {
+        //    router.push(q || d)
+        //  }
+
+         router.push(d || '/account/index')
+        // router.push()
 
         toastify({
           text: `Welcome back`,
@@ -195,5 +212,10 @@ export default {
           NProgress.done();
         }
       },
+
+      logout({commit}) {
+        commit('LOGOUT')
+        localStorage.clear()
+      }
   },
 };

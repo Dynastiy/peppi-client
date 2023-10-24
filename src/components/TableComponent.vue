@@ -1,16 +1,43 @@
 <template>
   <div>
-    <b-table outlined responsive="sm" :items="items" :fields="fields">
+    <b-table
+      outlined
+      :responsive="true"
+      :busy="busy"
+      :items="items"
+      tdClass="tw-w-9/12 whitespace-nowrap"
+      :fields="fields"
+      show-empty
+    >
+      <template #empty>
+        <div class="p-4">
+          <div
+            class="d-flex align-items-center flex-column justify-content-center"
+          >
+            <h5 class="no-data">No data recorded</h5>
+            <!-- <img src="@/assets/img/empty.svg" alt="empty-list" class="empty" /> -->
+          </div>
+        </div>
+      </template>
+
+      <template #table-busy>
+        <b-skeleton-table
+          :rows="4"
+          :columns="4"
+          :table-props="{ bordered: false, striped: false }"
+        ></b-skeleton-table>
+      </template>
+
       <template #cell(productTotal)="data">
         {{
-          data.item.product !== null ? Number(data.item.quantity * data.item.product.price).toLocaleString(
-            "en-US",
-            {
-              style: "currency",
-              currency: "NGN",
-            }
-          )
-          : "---"
+          data.item.product !== null
+            ? Number(
+                data.item.quantity * data.item.product.price
+              ).toLocaleString("en-US", {
+                style: "currency",
+                currency: "NGN",
+              })
+            : "---"
         }}
       </template>
 
@@ -36,8 +63,10 @@
       <template #cell(cartImg)="data">
         <span>
           <img
-            class="lg:tw-h-[60px] md:tw-h-[60px] tw-h-[50px] tw-border tw-border-gray400 tw-p-[5px] lg:tw lg:tw-w-[60px] md:tw-w-[60px] tw-w-[50px] tw-object-cover"
-            :src="data.item.product !== null ? data.item.product.images[0].url : ''"
+            class="tw-block lg:tw-w-[60px] md:tw-w-[60px] tw-w-[50px] lg:tw-h-[60px] md:tw-h-[60px] tw-h-[50px] tw-border tw-border-gray400 tw-p-[5px] tw-object-cover"
+            :src="
+              data.item.product !== null ? data.item.product.images[0].url : ''
+            "
             alt=""
           />
         </span>
@@ -56,6 +85,10 @@ export default {
     fields: {
       type: Array,
       default: () => [],
+    },
+    busy: {
+      type: Boolean,
+      default: false,
     },
   },
 

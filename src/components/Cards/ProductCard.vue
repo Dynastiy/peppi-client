@@ -26,19 +26,16 @@
         class="tw-block tw-uppercase tw-tracking-widest hover:tw-text-primary tw-ease-in-out tw-duration-1000"
         >{{ item.name }}</span
       >
-      <span
-        class="tw-block tw-uppercase tw-font-medium hover:tw-text-primary tw-ease-in-out tw-duration-1000"
-        >{{
-          Number(item.price).toLocaleString("en-US", {
-            style: "currency",
-            currency: "NGN",
-          })
-        }}</span
-      >
+      <span class="tw-block tw-uppercase tw-font-semibold tw-font-medium">{{
+        Number(item.price).toLocaleString("en-US", {
+          style: "currency",
+          currency: "NGN",
+        })
+      }}</span>
       <div class="tw-flex tw-gap-4 tw-items-center">
         <button
           @click="checkItemInCart(item.id) ? updateCartItem() : addToCart()"
-          class="peppi-btn peppi-primary hover:tw-bg-dark-100 tw-ease-in-out tw-duration-300 tw-w-full"
+          class="peppi-btn peppi-primary hover:tw-bg-dark-100 tw-ease-in-out tw-duration-300 tw-px-8 tw-w-full"
         >
           Add to Cart
         </button>
@@ -104,7 +101,10 @@ export default {
           return res;
         })
         .catch((err) => {
-          console.log(err);
+          if (err.data.message === 'Attempt to read property "id" on null') {
+            this.$router.push("/sign-in");
+          }
+          console.log(err.data.message);
         });
     },
 
@@ -134,7 +134,6 @@ export default {
 
     removeItemFromWishlist() {
       const id = this.wishlistItem[0].id;
-
       this.$request
         .post(`wishlist/delete/${id}`)
         .then((res) => {
@@ -171,6 +170,9 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          if (err.data.message === 'Attempt to read property "id" on null') {
+            this.$router.push("/sign-in");
+          }
         });
     },
 

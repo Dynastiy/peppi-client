@@ -4,13 +4,13 @@
       <div>
         <span class="tw-flex tw-space-x-3">
           <a href="/">
-            <i-icon icon="bxl:facebook" class="top-header-icon"/>
-          </a>
-          <a href="/"> 
-            <i-icon icon="mdi:twitter" class="top-header-icon"/>
+            <i-icon icon="bxl:facebook" class="top-header-icon" />
           </a>
           <a href="/">
-            <i-icon icon="raphael:instagram" class="top-header-icon"/>
+            <i-icon icon="mdi:twitter" class="top-header-icon" />
+          </a>
+          <a href="/">
+            <i-icon icon="raphael:instagram" class="top-header-icon" />
           </a>
         </span>
       </div>
@@ -18,23 +18,53 @@
         <span class="tw-tracking-widest">welcome to peppy stores</span>
       </div>
       <div class="tw-flex tw-space-x-2" v-if="!isLoggedIn">
-        <router-link class="tw-tracking-wider" to="/sign-in">sign in</router-link>
+        <router-link class="tw-tracking-wider" to="/sign-in"
+          >sign in</router-link
+        >
         <span>/</span>
-        <router-link class="tw-tracking-wider" to="/sign-up">sign up</router-link>
+        <router-link class="tw-tracking-wider" to="/sign-up"
+          >sign up</router-link
+        >
       </div>
-      <router-link v-else class="tw-tracking-wider" to="/">logout</router-link>
+      <a v-else class="tw-tracking-wider" role="button" @click="logout"
+        >logout</a
+      >
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  methods: {
+    logout() {
+      this.$swal
+        .fire({
+          title: "Uhhhh! 😔",
+          text: "Are you sure you want to log out?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, logout!",
+        })
+        .then((result) => {
+          console.log(result, "kkk");
+          if (result.isConfirmed) {
+            this.userLogout();
+          }
+        });
+    },
+
+    userLogout() {
+      this.$swal.fire("Woo hoo 😫!", "Loged out succesfully.", "success");
+      this.$store.dispatch("auth/logout");
+      this.$router.go();
+    },
+  },
   computed: {
-    isLoggedIn(){
-      const accessToken = localStorage.getItem('token')
-      return accessToken
-    }
-  }
+    isLoggedIn() {
+      const accessToken = localStorage.getItem("token");
+      return accessToken;
+    },
+  },
 };
 </script>
 
@@ -49,6 +79,6 @@ export default {
 }
 
 .top-header-icon {
-    font-size: 18px;
+  font-size: 18px;
 }
 </style>

@@ -9,9 +9,8 @@
     </div>
 
     <div class="lg:tw-mt-16 md:tw-mt-12 tw-mt-8">
-      <products-catalog-header :total="meta.total" :from="meta.from" :to="meta.to" :loading="loading"/>
+      <products-catalog-header :total="meta.total" :from="meta.from" :to="meta.to" :loading="loading"/>  
       <hr class="tw-my-8" />
-
       <b-skeleton-wrapper :loading="loading">
         <template #loading>
           <div
@@ -39,6 +38,12 @@
             :item="item"
             @reloadData="getProducts"
           />
+          <div v-if="products.length === 0">
+            <span class="tw-text-red-500 tw-flex tw-items-center tw-font-medium">
+              <i-icon icon="jam:close" width="30px"/>
+              <span>No items Found</span>
+            </span>
+          </div>
         </div>
       </b-skeleton-wrapper>
     </div>
@@ -84,6 +89,7 @@ export default {
         });
     },
   },
+  
   beforeMount() {
     this.getProducts();
   },

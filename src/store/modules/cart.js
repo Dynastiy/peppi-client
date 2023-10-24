@@ -12,7 +12,8 @@ Vue.use(require("vue-moment"));
 const getDefaultState = () => {
   return {
     cart: [],
-    wishlist: []
+    wishlist: [],
+    loading: false
   };
 };
 
@@ -22,6 +23,7 @@ export default {
   getters: {
     getCartItems: (state) => state.cart,
     getWishlistItems: (state) => state.wishlist,
+    isLoading: (state) => state.loading
   },
 
   mutations: {
@@ -33,17 +35,24 @@ export default {
         state.wishlist = payload;
       },
 
+      SET_LOADING(state, payload) {
+        state.loading = payload;
+      },
+
   },
   actions: {
     // Get Cart Items
     async getUserCart({ commit }) {
+      commit('SET_LOADING', true)
       try {
         let res = await $request.get(`/cart`);
         let responsePayload = res.data;
         commit('SET_CART', responsePayload.cart_list)
         console.log(responsePayload);
+        commit('SET_LOADING', false)
         return res;
       } catch (error) {
+        commit('SET_LOADING', false)
         return error.data;
       }
     },
@@ -51,13 +60,16 @@ export default {
 
     // Get Cart Items
     async getUserWishlist({ commit }) {
+      commit('SET_LOADING', true)
         try {
           let res = await $request.get(`/wishlist`);
           let responsePayload = res.data;
           commit('SET_WISHLIST', responsePayload.wish_list)
           console.log(responsePayload);
+          commit('SET_LOADING', false)
           return res;
         } catch (error) {
+          commit('SET_LOADING', false)
           return error.data;
         }
       },

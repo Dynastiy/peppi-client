@@ -71,9 +71,8 @@
         >
           <div>
             <img
-              v-if="product.images"
               class="tw-h-80 lg:tw tw-w-full tw-object-cover tw-mx-auto tw-block"
-              :src="product.images[0].url"
+              :src="activeImage.url"
               alt=""
             />
           </div>
@@ -85,7 +84,7 @@
             </h3>
             <h3 class="tw-text-lg tw-font-semibold">
               {{
-                Number(product.price).toLocaleString("en-US", {
+                Number(amount).toLocaleString("en-US", {
                   style: "currency",
                   currency: "NGN",
                 })
@@ -94,20 +93,27 @@
             <hr />
             <div class="tw-flex tw-gap-4">
               <img
+                role="button"
                 v-for="(item, idx) in product.images"
+                @click="selectImage(item)"
                 :key="idx"
                 :src="item.url"
-                class="tw-w-16 tw-h-16 tw-p-1 tw-border tw-border-primary"
+                class="tw-w-16 tw-h-16 tw-p-1 tw-border"
                 alt=""
+                :class="{'tw-border-primary': activeImage === item}"
               />
             </div>
             <div class="tw-flex tw-space-x-4 tw-w-64">
               <input
                 type="tel"
+                v-model="quantity"
                 placeholder="0"
                 class="tw-w-4/12 tw-border-0 tw-bg-gray200 tw-px-2 tw-outline-none tw-rounded-none"
               />
-              <button class="peppi-btn peppi-primary tw-px-5 tw-w-auto">
+              <button
+                @click="cartAction"
+                class="peppi-btn peppi-primary tw-px-5 tw-w-auto"
+              >
                 Add to Cart
               </button>
             </div>
@@ -132,29 +138,20 @@
             <el-tab-pane
               v-for="(item, index) in tabs"
               :key="index"
-              :name="index.name === 'reviews' ? `${index.name}(${product.reviews.length})` : index.name "
+              :name="
+                index.name === 'reviews'
+                  ? `${index.name}(${product.reviews.length})`
+                  : index.name
+              "
               :label="item.title"
             >
-              <component :item="product" @reloadData="getProduct" :is="tabs[index].component" />
+              <component
+                :item="product"
+                @reloadData="getProduct"
+                :is="tabs[index].component"
+              />
             </el-tab-pane>
           </el-tabs>
-          <!-- <el-collapse accordion>
-                <el-collapse-item
-                  v-for="(item, index) in tabs"
-                  :key="index"
-                  :name="index"
-                >
-                  <template slot="title">
-                    <div class="tw-flex tw-space-x-2 tw-items-center">
-                      <i-icon icon="tdesign:plus" width="20px" />
-                      <span class="tw-tracking-widest">{{ item.title }}</span>
-                    </div>
-                  </template>
-                  <div>
-                    <component :item="product" :is="tabs[index].component" />
-                  </div>
-                </el-collapse-item>
-              </el-collapse> -->
         </div>
       </template>
     </b-skeleton-wrapper>
@@ -194,6 +191,9 @@ export default {
       id: this.$route.params.id,
       product: {},
       isLoading: false,
+      quantity: "1",
+      cartItem: [],
+      activeImage: {},
     };
   },
 
@@ -213,6 +213,62 @@ export default {
         });
     },
 
+    cartAction() {
+      Object.keys(this.checkItemInCart).length > 0
+        ? this.updateCartItem()
+        : this.addToCart();
+    },
+
+    addToCart() {
+      this.busy = false;
+      let payload = {
+        quantity: this.quantity,
+        product_id: this.id,
+      };
+      this.$request
+        .post(`cart/add`, payload)
+        .then((res) => {
+          this.$swal.fire(
+            "Woa!",
+            `${this.product.name} added to cart.`,
+            "success"
+          );
+          this.$store.dispatch("cart/getUserCart");
+          return res;
+        })
+        .catch((err) => {
+          if (err.data.message === 'Attempt to read property "id" on null') {
+            this.$router.push("/sign-in?redirectFrom=" + this.route);
+          }
+          console.log(err.data.message);
+        });
+    },
+
+    updateCartItem() {
+      let payload = {
+        quantity: this.quantity,
+        product_id: this.id,
+      };
+      this.$request
+        .post(`cart/update/${this.checkItemInCart.id}`, payload)
+        .then((res) => {
+          this.$swal.fire(
+            "Nice!",
+            `${this.product.name} updated in cart.`,
+            "success"
+          );
+          this.$store.dispatch("cart/getUserCart");
+          return res;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    selectImage(e) {
+      this.activeImage = e;
+    },
+
     handleClick(tab, event) {
       console.log(tab, event);
     },
@@ -222,15 +278,61 @@ export default {
     this.getProduct();
   },
 
+  mounted() {},
+
   watch: {
     activeName(val) {
       this.activeTab = val;
+    },
+
+    checkItemInCart: {
+      handler(val) {
+        if (Object.keys(val).length > 0) {
+          console.log(val);
+          this.quantity = val.quantity;
+        }
+      },
+    },
+
+    product: {
+      handler(val) {
+        if (Object.keys(val).length !== 0) {
+          this.activeImage = val.images[0];
+          console.log(this.activeImage, "kkkk");
+        }
+      },
     },
   },
 
   computed: {
     activeName() {
       return this.tabs[0].name;
+    },
+
+    cart() {
+      return this.$store.getters["cart/getCartItems"];
+    },
+
+    route() {
+      return this.$route.fullPath;
+    },
+
+    amount() {
+      let price = this.product.price;
+      return price * this.quantity;
+    },
+
+    checkItemInCart() {
+      const token = localStorage.getItem("token");
+      if (token) {
+        let cartItems = this.cart;
+        let val = cartItems.find((elem) => this.product.id === elem.product_id);
+        // console.log(val);
+        // const result = val.length !== 0;
+        return val;
+      } else {
+        return {};
+      }
     },
   },
 };
