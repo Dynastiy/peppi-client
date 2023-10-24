@@ -4,18 +4,7 @@
       class="tw-grid lg:tw-grid-cols-6 md:tw-grid-cols-6 tw-grid-cols-1 lg:tw-gap-5 md:tw-gap-3 tw-gap-3"
     >
       <div class="lg:tw-col-span-4 md:tw-col-span-3">
-        <!-- <table-component
-          :items="cart"
-          :fields="fields"
-          :busy="loading"
-          @remove="removeCartItem"
-        /> -->
         <cart-items :items="cart" :fields="fields" :labels="labels" :data="data" @remove="removeCartItem"/>
-        <div class="tw-text-center" v-if="cart.length === 0">
-          <button class="peppi-btn peppi-primary" @click="$router.push('/')">
-            continue shopping
-          </button>
-        </div>
       </div>
       <div class="lg:tw-col-span-2 md:tw-col-span-2">
         <cart-and-shipping />
