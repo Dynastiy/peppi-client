@@ -6,7 +6,7 @@
     >
       <div class="lg:tw-px-8 md:tw-px-7 tw-px-5">
         <app-header :menu="menu" @toggleDrawer="toggleDrawer"/>
-        <page-header v-if="!routeHome"/>
+        <page-header v-if="routeHeader"/>
       <slot />
       </div>
       <app-footer />
@@ -72,8 +72,8 @@ export default {
   },
 
   computed: {
-    routeHome(){
-      return this.$route.name === 'home'
+    routeHeader(){
+      return this.$route.meta.hasHeader
     }
   }
 };

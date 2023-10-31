@@ -19,6 +19,7 @@
     <ul class="tw-mb-3 tw-pl-0 tw-flex tw-flex-col">
       <li v-for="item in userMenu" :key="item?.id">
         <router-link
+        :class="{'router-link-exact-active': item.parent === routeParent}"
           :to="item?.url"
           class="tw-flex tw-space-x-2 tw-items-center tw-no-underline tw-text-dark-100 tw-text-[13px] tw-w-full hover:tw-bg-gray200 tw-py-3 tw-px-5 tw-uppercase tw-tracking-widest"
         >
@@ -40,6 +41,7 @@ export default {
           title: "Profile",
           icon: "ri:user-line",
           url: "/account/index",
+          parent: "profile"
         },
 
         {
@@ -47,6 +49,7 @@ export default {
           title: "Saved Items",
           icon: "icon-park-outline:like",
           url: "/account/saved-items",
+          parent: "saved-items"
         },
 
         {
@@ -54,6 +57,7 @@ export default {
           title: "History",
           icon: "material-symbols:history",
           url: "/account/history",
+          parent: "history"
         },
 
         {
@@ -61,6 +65,7 @@ export default {
           title: "Notifications",
           icon: "ion:notifications-outline",
           url: "/account/notifications",
+          parent: "notifications"
         },
 
         {
@@ -68,10 +73,17 @@ export default {
           title: "Account Management",
           icon: "ri:user-settings-line",
           url: "/account/account-management",
+          parent: "account"
         },
       ],
     };
   },
+
+  computed:{
+    routeParent(){
+      return this.$route.meta.parent
+    }
+  }
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="auth-content">
     <div>
-      <div class="tw-mb-6">
+      <div class="tw-mb-4">
         <img src="@/assets/img/peppi-icon.svg" class="tw-h-12 tw-w-12" alt="" />
         <h5 class="tw-font-bold tw-text-2xl tw-mb-0">Welcome back,</h5>
         <small class="tw-text-light tw-text-xs"
@@ -10,7 +10,7 @@
       </div>
       <validation-observer v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(onSubmit)">
-          <span v-if="error" class="tw-mb-2 error-alert">{{ error }}</span>
+          <span v-if="error" class="tw-mb-3 error-alert tw-text-red-600 tw-text-xs">{{ error }}</span>
 
           <div>
             <validation-provider

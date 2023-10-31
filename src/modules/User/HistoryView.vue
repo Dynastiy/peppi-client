@@ -3,14 +3,14 @@
     <div class="tw-flex tw-justify-between tw-items-center">
       <UtilsBaseCardTab class="" @tabname="selectTab">
         <h5 class="tw-font-semibold tw-text-[20px] tw-mt-4">{{ headerName }}</h5>
-        <UtilsCardTab title="Open Orders">
+        <UtilsCardTab title="Order History">
           <div class="tw-mt-4">
-            <personal-details />
+            <order-history />
           </div>
         </UtilsCardTab>
-        <UtilsCardTab title="Closed Orders">
+        <UtilsCardTab title="Payment History">
           <div class="tw-mt-4">
-            <account-security />
+            <payment-history />
           </div>
         </UtilsCardTab>
       </UtilsBaseCardTab>
@@ -21,14 +21,14 @@
 <script>
 import UtilsBaseCardTab from "@/components/Utils/BaseCardTab.vue";
 import UtilsCardTab from "@/components/Utils/CardTab.vue";
-import PersonalDetails from "@/components/User/AccountManagement/PersonalDetails.vue";
-import AccountSecurity from "@/components/User/AccountManagement/AccountSecurity.vue";
+import OrderHistory from '@/components/User/History/OrderHistory.vue';
+import PaymentHistory from '@/components/User/History/PaymentHistory.vue';
 export default {
   components: {
     UtilsBaseCardTab,
     UtilsCardTab,
-    PersonalDetails,
-    AccountSecurity,
+    OrderHistory,
+    PaymentHistory,
   },
 
   data(){
@@ -41,7 +41,6 @@ export default {
 
   methods:{
     selectTab(value) {
-      // console.log(value, "mmm");
       this.headerName = value
     }
   }

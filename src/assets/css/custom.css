@@ -264,3 +264,62 @@ form label {
 #nprogress .peg {
     box-shadow: 0 0 10px var(--primary), 0 0 5px var(--primary);
 }
+
+/* V Select  */
+.vs__dropdown-toggle {
+    padding: 8px 3px !important;
+    border: 1px solid var(--gray-400) !important;
+    border-radius: 0px !important;
+    align-items: center !important;
+}
+
+
+/* Status Tags  */
+.completed,
+.approved,
+.activated,
+.in-stock,
+.registered {
+    color: green;
+    background-color: rgba(0, 128, 0, 0.175);
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+.delivered {
+    color: rgb(41, 87, 89);
+    background-color: rgba(0, 255, 255, 0.175);
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 6px;
+}
+
+.canceled,
+.deactivated,
+.rejected,
+.banned,
+.out-of-stock,
+.not-registered {
+    color: red;
+    background-color: rgba(255, 0, 0, 0.175);
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 6px;
+}
+
+.in-progress {
+    color: purple;
+    background-color: rgba(128, 0, 128, 0.175);
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 6px;
+}
+
+.pending {
+    color: orange;
+    background-color: rgba(255, 166, 0, 0.175);
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 6px;
+}

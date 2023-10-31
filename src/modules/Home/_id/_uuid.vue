@@ -214,7 +214,7 @@ export default {
     },
 
     cartAction() {
-      Object.keys(this.checkItemInCart).length > 0
+      this.checkItemInCart > 0
         ? this.updateCartItem()
         : this.addToCart();
     },

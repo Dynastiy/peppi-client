@@ -27,10 +27,7 @@
         >{{ item.name }}</span
       >
       <span class="tw-block tw-uppercase tw-font-semibold tw-font-medium">{{
-        Number(item.price).toLocaleString("en-US", {
-          style: "currency",
-          currency: "NGN",
-        })
+        item.price | formatCurrency
       }}</span>
       <div class="tw-flex tw-gap-4 tw-items-center">
         <button

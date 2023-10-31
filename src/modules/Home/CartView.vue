@@ -4,9 +4,13 @@
       class="tw-grid lg:tw-grid-cols-6 md:tw-grid-cols-6 tw-grid-cols-1 lg:tw-gap-5 md:tw-gap-3 tw-gap-3"
     >
       <div class="lg:tw-col-span-4 md:tw-col-span-3">
-        <cart-items :items="cart" :fields="fields" :labels="labels" :data="data" @remove="removeCartItem"/>
+        <cart-items
+          :items="cart"
+          :fields="fields"
+          @remove="removeCartItem"
+        />
       </div>
-      <div class="lg:tw-col-span-2 md:tw-col-span-2">
+      <div class="lg:tw-col-span-2 md:tw-col-span-2" v-if="cart.length > 0">
         <cart-and-shipping />
       </div>
     </div>

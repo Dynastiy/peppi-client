@@ -5,6 +5,11 @@ import ProductDetails from "@/modules/Home/_id/_uuid.vue"
 
 import Categories from "@/modules/Home/CategoriesPage.vue"
 import ContactUs from "@/modules/Home/ContactPage.vue"
+import CheckoutViewVue from "@/modules/Home/CheckoutView.vue";
+import redirectingToPaymentPageVue from "@/modules/Payments/redirectingToPaymentPage.vue";
+import PaymentSuccesfulVue from "@/modules/Payments/PaymentSuccesful.vue";
+import PaymentFailed from "@/modules/Payments/PaymentFailed.vue";
+import PaymentCancelled from "@/modules/Payments/PaymentCancelled.vue";
 
 const router = [
   {
@@ -15,6 +20,7 @@ const router = [
       layout: "AppHomeLayout",
       parent: "home",
       name: "home",
+      hasHeader: false
     },
   },
 
@@ -27,6 +33,7 @@ const router = [
       parent: "home",
       name: "product-details",
       header: "product details",
+      hasHeader: true,
       breadcrumb: [
         {
           text: "home",
@@ -49,6 +56,7 @@ const router = [
       parent: "categories",
       name: "categories",
       header: "categories",
+      hasHeader: true,
     },
   },
 
@@ -61,6 +69,7 @@ const router = [
       parent: "contact-us",
       name: "contact-us",
       header: "contact us",
+      hasHeader: true,
     },
   },
 
@@ -74,6 +83,7 @@ const router = [
       name: "cart",
       header: "Cart",
       requiresAuth: true,
+      hasHeader: true,
       breadcrumb: [
         {
           text: "home",
@@ -86,6 +96,82 @@ const router = [
       ],
     },
   },
+
+  {
+    path: "/checkout/summary",
+    name: "checkout",
+    component: CheckoutViewVue,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "home",
+      name: "checkout",
+      header: "checkout",
+      requiresAuth: true,
+      hasHeader: true,
+      breadcrumb: [
+        {
+          text: "home",
+          icon: "iconoir:home",
+          href: "/",
+        },
+        {
+          text: "checkout",
+        },
+      ],
+    },
+  },
+
+  {
+    path: "/checkout/:id",
+    name: "redirecting-to-secure-page",
+    component: redirectingToPaymentPageVue,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "home",
+      name: "home",
+      requiresAuth: true,
+      hasHeader: false
+    },
+  },
+
+  {
+    path: "/payment-successful",
+    name: "payment-successful",
+    component: PaymentSuccesfulVue,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "home",
+      name: "home",
+      requiresAuth: true,
+      hasHeader: false
+    },
+  },
+
+  {
+    path: "/payment-failed",
+    name: "payment-failed",
+    component: PaymentFailed,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "home",
+      name: "home",
+      requiresAuth: true,
+      hasHeader: false
+    },
+  },
+
+  {
+    path: "/payment-cancelled",
+    name: "payment-cancelled",
+    component: PaymentCancelled,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "home",
+      name: "home",
+      requiresAuth: true,
+      hasHeader: false
+    },
+  }
 ];
 
 export default router;

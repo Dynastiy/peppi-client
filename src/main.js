@@ -36,26 +36,25 @@ import { ValidationProvider, ValidationObserver, extend } from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
 import { messages } from "vee-validate/dist/locale/en.json";
 
-Object.keys(rules).forEach(rule => {
+Object.keys(rules).forEach((rule) => {
   extend(rule, {
     ...rules[rule], // copies rule configuration
-    message: messages[rule] // assign message
+    message: messages[rule], // assign message
   });
 });
 
 Vue.component("validation-provider", ValidationProvider);
 Vue.component("validation-observer", ValidationObserver);
 
-
-import VueToast from 'vue-toast-notification';
+import VueToast from "vue-toast-notification";
 // Import one of the available themes
 // import 'vue-toast-notification/dist/theme-default.css';
-import 'vue-toast-notification/dist/theme-bootstrap.css';
+import "vue-toast-notification/dist/theme-bootstrap.css";
 
 Vue.use(VueToast);
 
-import VueClipboard from 'vue-clipboard2'
-Vue.use(VueClipboard)
+import VueClipboard from "vue-clipboard2";
+Vue.use(VueClipboard);
 
 // import services from "./services.js";
 
@@ -64,14 +63,14 @@ import vSelect from "vue-select";
 Vue.component("v-select", vSelect);
 import "vue-select/dist/vue-select.css";
 
-import $request from '@/http/axios'
-Vue.prototype.$request = $request
+import $request from "@/http/axios";
+Vue.prototype.$request = $request;
 
 import toastify from "toastify-js";
-import "toastify-js/src/toastify.css"
-Vue.prototype.$toastify = toastify
+import "toastify-js/src/toastify.css";
+Vue.prototype.$toastify = toastify;
 
-import StarRating from 'vue-star-rating'
+import StarRating from "vue-star-rating";
 Vue.component("star-rating", StarRating);
 
 // vue-sweetalert2
@@ -86,6 +85,15 @@ Vue.use(VueSweetalert2, {
     confirmButton: "tw-bg-green-600 tw-text-white tw-py-3",
     cancelButton: "tw-bg-red-600 tw-text-white tw-py-3",
   },
+});
+
+Vue.filter("formatCurrency", function (value) {
+  if (!value) return "";
+  value = Number(value).toLocaleString("en-US", {
+    style: "currency",
+    currency: "NGN",
+  });
+  return value;
 });
 
 new Vue({
