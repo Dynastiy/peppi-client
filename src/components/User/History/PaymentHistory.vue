@@ -49,6 +49,17 @@
         </div>
       </div>
 
+      <div
+        v-if="items.length === 0"
+        class="tw-flex tw-flex-col tw-items-center"
+      >
+        <i-icon icon="system-uicons:box-open" width="200" />
+        <h6 class="tw-my-3 tw-text-red-600">You have no payments yet</h6>
+        <button class="peppi-btn peppi-primary" @click="$router.push('/')">
+          Continue Shopping
+        </button>
+      </div>
+
       <!-- Pagination -->
       <app-pagination />
     </b-skeleton-wrapper>

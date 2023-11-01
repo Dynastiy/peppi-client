@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="tw-bg-gray200 tw-py-6 tw-mb-6">
-      <h4
-        class="tw-text-center tw-font-bold tw-mb-0 tw-uppercase tw-tracking-widest"
-      >
-        {{ item.category_name }}
-      </h4>
+      <div class="tw-flex tw-justify-center tw-items-center tw-gap-2">
+        <div>
+          <img :src="item.icon_image" class="tw-w-6 tw-h-6" alt="" />
+        </div>
+        <h4 class="tw-font-bold tw-mb-0 tw-uppercase tw-tracking-widest">
+          {{ item.category_name }}
+        </h4>
+      </div>
     </div>
     <div class="products tw-col-span-2">
       <div class="lg:tw-mt-16 md:tw-mt-12 tw-mt-8">

@@ -57,7 +57,10 @@
                     <span>Quantity:</span>
                     <span>{{ productData.pivot.quantity }} </span>
                     <span>|</span>
-                    <span>{{(productData.pivot.quantity * productData.price) | formatCurrency }}</span>
+                    <span>{{
+                      (productData.pivot.quantity * productData.price)
+                        | formatCurrency
+                    }}</span>
                   </h6>
                 </div>
               </div>
@@ -65,6 +68,17 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div
+        v-if="items.length === 0"
+        class="tw-flex tw-flex-col tw-items-center"
+      >
+        <i-icon icon="system-uicons:box-open" width="200" />
+        <h6 class="tw-my-3 tw-text-red-600">You have no orders yet</h6>
+        <button class="peppi-btn peppi-primary" @click="$router.push('/')">
+          Continue Shopping
+        </button>
       </div>
 
       <!-- Pagination -->

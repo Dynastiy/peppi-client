@@ -36,8 +36,8 @@ export default {
         email: this.user.email,
         phone: "",
         amount: overallAmount,
-        title: `Payment for ${this.totalQuantity} items`,
-        description: `Payment for ${this.totalQuantity} of items worth ${Number(
+        title: `Payment for ${this.cart.length} items`,
+        description: `Payment for ${this.cart.length} items worth ${Number(
           overallAmount
         ).toLocaleString("en-US", {
           style: "currency",
