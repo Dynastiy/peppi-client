@@ -2,6 +2,7 @@ import IndexViewVue from "@/views/UserView.vue";
 import ProfileView from "@/modules/User/ProfileView.vue";
 import HistoryView from "@/modules/User/HistoryView.vue";
 import OrderID from "@/modules/User/_id/OrderID.vue";
+import PaymentID from "@/modules/User/_id/PaymentID.vue";
 
 import NotificationsView from "@/modules/User/NotificationView.vue"
 import AccountManagement from "@/modules/User/AccountManagement.vue"
@@ -60,12 +61,13 @@ const router = [
         component: HistoryView,
         meta: {
           layout: "AppHomeLayout",
-          parent: "history",
+          parent: "account",
+          subParent: "history",
           name: "user-home",
           header: "my account",
           breadcrumb: [
             {
-              text: "home",
+              text: "home", 
               icon: "iconoir:home",
               href: "/",
             },
@@ -82,7 +84,8 @@ const router = [
         component: OrderID,
         meta: {
           layout: "AppHomeLayout",
-          parent: "history",
+          parent: "account",
+          subParent: "history",
           name: "user-home",
           header: "my account",
           breadcrumb: [
@@ -99,12 +102,36 @@ const router = [
       },
 
       {
+        path: "/payment/:id",
+        name: "payment-details",
+        component: PaymentID,
+        meta: {
+          layout: "AppHomeLayout",
+          parent: "account",
+          subParent: "history",
+          name: "user-home",
+          header: "my account",
+          breadcrumb: [
+            {
+              text: "home",
+              icon: "iconoir:home",
+              href: "/",
+            },
+            {
+              text: "Payment Details",
+            },
+          ],
+        },
+      },
+
+      {
         path: "notifications",
         name: "user-notifications",
         component: NotificationsView,
         meta: {
           layout: "AppHomeLayout",
-          parent: "notifications",
+          parent: "account",
+          subParent: "notifications",
           name: "user-home",
           header: "my account",
           breadcrumb: [
@@ -127,6 +154,7 @@ const router = [
         meta: {
           layout: "AppHomeLayout",
           parent: "account",
+          subParent: "account-management",
           name: "user-home",
           header: "my account",
           breadcrumb: [
@@ -148,7 +176,8 @@ const router = [
         component: WishlistView,
         meta: {
           layout: "AppHomeLayout",
-          parent: "saved-items",
+          parent: "account",
+          subParent: "saved-items",
           name: "user-home",
           header: "my account",
           breadcrumb: [

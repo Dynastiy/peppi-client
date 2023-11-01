@@ -222,23 +222,21 @@ form label {
 .table td {
     border-bottom: 1px solid var(--gray-300) !important;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .table tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.06);
 }
 
-.table thead th {
-    color: var(--gray-500) !important;
-}
 
 .table thead th {
     border-bottom: 1px solid var(--dark-100) !important;
     color: #fff !important;
     font-weight: 300 !important;
     background-color: var(--dark-100) !important;
-    padding: 12px 0 !important;
+    padding: 12px 10px !important;
+    font-size: 13px;
 }
 
 .table td {

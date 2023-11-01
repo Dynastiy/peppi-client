@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import moment from "moment";
 
 import "@/assets/css/style.css";
 
@@ -93,6 +94,13 @@ Vue.filter("formatCurrency", function (value) {
     style: "currency",
     currency: "NGN",
   });
+  return value;
+});
+
+Vue.filter("formatDate", function (value) {
+  if (!value) return "";
+  let date = new Date(value);
+  value = moment(String(date)).format("MMM DD, YYYY");
   return value;
 });
 

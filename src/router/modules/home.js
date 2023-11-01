@@ -4,12 +4,15 @@ import CartView from "@/modules/Home/CartView.vue";
 import ProductDetails from "@/modules/Home/_id/_uuid.vue"
 
 import Categories from "@/modules/Home/CategoriesPage.vue"
+import CategoryIDVue from "@/modules/Home/_id/CategoryID.vue";
+
 import ContactUs from "@/modules/Home/ContactPage.vue"
 import CheckoutViewVue from "@/modules/Home/CheckoutView.vue";
 import redirectingToPaymentPageVue from "@/modules/Payments/redirectingToPaymentPage.vue";
 import PaymentSuccesfulVue from "@/modules/Payments/PaymentSuccesful.vue";
 import PaymentFailed from "@/modules/Payments/PaymentFailed.vue";
 import PaymentCancelled from "@/modules/Payments/PaymentCancelled.vue";
+
 
 const router = [
   {
@@ -57,6 +60,19 @@ const router = [
       name: "categories",
       header: "categories",
       hasHeader: true,
+    },
+  },
+
+  {
+    path: "/category/:id",
+    name: "category-details",
+    component: CategoryIDVue,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "categories",
+      name: "categories",
+      header: "category details",
+      hasHeader: false,
     },
   },
 
@@ -142,7 +158,7 @@ const router = [
       layout: "AppHomeLayout",
       parent: "home",
       name: "home",
-      requiresAuth: true,
+      requiresAuth: false,
       hasHeader: false
     },
   },
@@ -155,7 +171,7 @@ const router = [
       layout: "AppHomeLayout",
       parent: "home",
       name: "home",
-      requiresAuth: true,
+      requiresAuth: false,
       hasHeader: false
     },
   },
@@ -168,7 +184,7 @@ const router = [
       layout: "AppHomeLayout",
       parent: "home",
       name: "home",
-      requiresAuth: true,
+      requiresAuth: false,
       hasHeader: false
     },
   }

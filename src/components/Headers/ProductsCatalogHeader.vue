@@ -6,7 +6,7 @@
       <template #loading>
         <b-skeleton width="40%"></b-skeleton>
       </template>
-      <span
+      <span v-if="isPaginated"
         class="tw-full tw-text-sm tw-uppercase tw-tracking-widest tw-text-dark-100"
         >showing {{ from }} - {{ to }} of {{ total }} result{{ total > 1 ? "s": "" }}
         <!-- Showing {{ ((currentPage - 1) * perPage) + items.length }} / {{ totalRecords }} -->
@@ -61,6 +61,10 @@ export default {
       default: false,
       type: Boolean,
     },
+    isPaginated: {
+      default: true,
+      type: Boolean
+    }
   },
   data() {
     return {

@@ -50,9 +50,8 @@
         >
           {{
             !pickup_station
-              ? `Checkout
-                (${cartTotalAmount | formatCurrency })`
-              : `Complete Order`
+              ? "Checkout"
+              : "Complete Order"
           }}
         </button>
       </div>

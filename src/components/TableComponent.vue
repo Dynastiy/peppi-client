@@ -41,6 +41,19 @@
         }}
       </template>
 
+      <template #cell(totalAmount)="data">
+        {{
+          data.item.product !== null
+            ? Number(
+                data.item.pivot.quantity * data.item.price
+              ).toLocaleString("en-US", {
+                style: "currency",
+                currency: "NGN",
+              })
+            : "---"
+        }}
+      </template>
+
       <template #cell(quantity)="data">
         <input
           type="tel"

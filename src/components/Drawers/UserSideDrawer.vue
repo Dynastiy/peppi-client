@@ -73,7 +73,7 @@ export default {
           title: "Account Management",
           icon: "ri:user-settings-line",
           url: "/account/account-management",
-          parent: "account"
+          parent: "account-management"
         },
       ],
     };
@@ -81,7 +81,7 @@ export default {
 
   computed:{
     routeParent(){
-      return this.$route.meta.parent
+      return this.$route.meta.subParent
     }
   }
 };

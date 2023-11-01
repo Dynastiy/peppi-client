@@ -26,11 +26,23 @@
           v-for="(item, idx) in items"
           :key="idx"
         >
-          <div>
-            <span :class="item.status">{{ item.status }}</span>
-            <h4>
-              {{ item.amount | formatCurrency }}
-            </h4>
+          <div class="tw-flex tw-items-center tw-justify-between tw-mb-2">
+            <span class="tw-flex tw-items-center tw-gap-2">
+              <span :class="item.status">{{ item.status }}</span>
+              <h5 class="tw-mb-0 tw-font-semibold">
+                {{ item.amount | formatCurrency }}
+              </h5>
+            </span>
+            <router-link
+              class="tw-font-normal tw-text-xs tw-text-gray-600"
+              :to="'/payment/' + item.id"
+              >Details</router-link
+            >
+          </div>
+          <div class="tw-flex tw-items-center tw-gap-2 tw-text-xs">
+            <span> {{ item.created_at | formatDate }} </span>
+            <span>|</span>
+            <span>{{ item.tx_ref }}</span>
           </div>
           <hr class="tw-my-2 tw-border-gray400" />
           <p class="tw-mb-0 tw-text-xs">{{ item.description }}</p>
