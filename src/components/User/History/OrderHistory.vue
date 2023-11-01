@@ -82,7 +82,7 @@
       </div>
 
       <!-- Pagination -->
-      <app-pagination />
+      <app-pagination :items="items" :meta="meta"/>
     </b-skeleton-wrapper>
   </div>
 </template>
@@ -95,6 +95,7 @@ export default {
     return {
       items: [],
       loading: false,
+      meta: {}
     };
   },
 
@@ -107,6 +108,11 @@ export default {
           console.log(res);
           let resPayload = res.data.orders;
           this.items = resPayload.data;
+          this.meta = {
+            to: resPayload.to,
+            from: resPayload.from,
+            total: resPayload.total
+          }
           this.loading = false;
         })
         .catch((err) => {
