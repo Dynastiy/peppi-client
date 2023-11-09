@@ -13,7 +13,7 @@
             <account-security />
           </div>
         </UtilsCardTab>
-        <UtilsCardTab title="Permissions & Accessibility">
+        <!-- <UtilsCardTab title="Permissions & Accessibility">
           <div class="tw-mt-4">
             <permissions-and-accessibility />
           </div>
@@ -22,7 +22,7 @@
           <div class="tw-mt-4">
             <user-preferences />
           </div>
-        </UtilsCardTab>
+        </UtilsCardTab> -->
       </UtilsBaseCardTab>
     </div>
   </div>
@@ -32,16 +32,16 @@
 import UtilsBaseCardTab from "@/components/Utils/BaseCardTab.vue";
 import UtilsCardTab from "@/components/Utils/CardTab.vue";
 import PersonalDetails from "@/components/User/AccountManagement/PersonalDetails.vue";
-import UserPreferences from "@/components/User/AccountManagement/UserPreferences.vue";
-import PermissionsAndAccessibility from "@/components/User/AccountManagement/PermissionsAndAccessibility.vue";
+// import UserPreferences from "@/components/User/AccountManagement/UserPreferences.vue";
+// import PermissionsAndAccessibility from "@/components/User/AccountManagement/PermissionsAndAccessibility.vue";
 import AccountSecurity from "@/components/User/AccountManagement/AccountSecurity.vue";
 export default {
   components: {
     UtilsBaseCardTab,
     UtilsCardTab,
     PersonalDetails,
-    UserPreferences,
-    PermissionsAndAccessibility,
+    // UserPreferences,
+    // PermissionsAndAccessibility,
     AccountSecurity,
   },
 

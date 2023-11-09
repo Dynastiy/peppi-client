@@ -36,14 +36,21 @@ export default {
   data() {
     return {
       userMenu: [
-        {
-          id: 1,
-          title: "Profile",
-          icon: "ri:user-line",
-          url: "/account/index",
-          parent: "profile"
-        },
+        // {
+        //   id: 1,
+        //   title: "Profile",
+        //   icon: "ri:user-line",
+        //   url: "/account/index",
+        //   parent: "profile"
+        // },
 
+        {
+          id: 5,
+          title: "Account Management",
+          icon: "ri:user-settings-line",
+          url: "/account/index",
+          parent: "account-management"
+        },
         {
           id: 2,
           title: "Saved Items",
@@ -68,13 +75,7 @@ export default {
           parent: "notifications"
         },
 
-        {
-          id: 5,
-          title: "Account Management",
-          icon: "ri:user-settings-line",
-          url: "/account/account-management",
-          parent: "account-management"
-        },
+        
       ],
     };
   },

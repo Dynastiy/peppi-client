@@ -11,7 +11,7 @@
       <div class="tw-flex tw-justify-between tw-items-center tw-mb-3">
         <span class="tw-text-sm tw-font-normal">Subtotal:</span>
         <h5 class="tw-font-semibold">
-          {{cartTotalAmount | formatCurrency}}
+          {{ cartTotalAmount | formatCurrency }}
         </h5>
       </div>
 
@@ -25,7 +25,7 @@
         <div class="tw-flex tw-justify-between tw-items-center tw-mb-3" v-else>
           <span class="tw-text-sm tw-font-normal">Delivery Fees:</span>
           <h5 class="tw-font-semibold">
-            {{totalAmount | formatCurrency}}
+            {{ totalAmount | formatCurrency }}
           </h5>
         </div>
 
@@ -34,8 +34,7 @@
           <div class="tw-flex tw-justify-between tw-items-center">
             <span class="tw-text-sm tw-font-semibold">Total:</span>
             <h5 class="tw-font-semibold">
-              {{
-                overallAmount | formatCurrency}}
+              {{ overallAmount | formatCurrency }}
             </h5>
           </div>
         </div>
@@ -48,11 +47,7 @@
           class="peppi-btn peppi-primary"
           @click="pickup_station ? makePayment() : toCheckoutPage()"
         >
-          {{
-            !pickup_station
-              ? "Checkout"
-              : "Complete Order"
-          }}
+          {{ !pickup_station ? "Checkout" : "Complete Order" }}
         </button>
       </div>
     </div>
@@ -62,10 +57,13 @@
 <script>
 export default {
   props: ["pickup_station"],
+  data() {
+    return {};
+  },
 
   methods: {
     toCheckoutPage() {
-      this.$router.push("/checkout/summary").catch(()=>{});
+      this.$router.push("/checkout/summary").catch(() => {});
     },
 
     makePayment() {
@@ -75,19 +73,48 @@ export default {
         state_id: this.pickup_station.state.id,
         pickup_location_id: this.pickup_station.pickup_location.id,
       };
-      this.$request.post('/orders/make', payload)
-      .then((res)=> {
-        console.log(res.data.order, "kkk");
-        let resPayload = res.data.order
-        let inverseId = btoa(resPayload.id)
-        console.log(btoa(resPayload.id));
-        this.$router.push(`/checkout/${inverseId}?identifier=${resPayload.id}&amount=${this.overallAmount}`)
-        // this.pay(resPayload.id)
-      })
-      .catch((err)=> {
-        console.log(err);
-      })
+      this.$request
+        .post("/orders/make", payload)
+        .then((res) => {
+          console.log(res.data.order, "kkk");
+          let resPayload = res.data.order;
+          let inverseId = btoa(resPayload.id);
+          console.log(btoa(resPayload.id));
+          this.$router.push(
+            `/checkout/${inverseId}?identifier=${resPayload.id}&amount=${this.overallAmount}`
+          );
+          // this.pay(resPayload.id)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       console.log(payload);
+    },
+
+    getShippingAmount() {
+      for (const item of this.cart) {
+        this.$request
+          .get(
+            `/products/${item.product.id}/${this.pickup_station.pickup_location.id}`
+          )
+          .then((res) => {
+            console.log(res.data, "kkk");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+  },
+
+  watch: {
+    pickup_station: {
+      handler(newVal, oldVal) {
+        if (newVal !== oldVal) {
+          this.getShippingAmount();
+        }
+      },
+      immediate: true,
     },
   },
 

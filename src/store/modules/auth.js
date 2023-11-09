@@ -112,37 +112,23 @@ export default {
   },
   actions: {
     // Login request
-    async loginUser({ commit }, payload) {
-      NProgress.start();
+    async loginUser({ commit, dispatch }, payload) {
       commit("SET_LOADING", true);
       try {
         let res = await $request.post(`auth/signin`, payload);
         localStorage.setItem("token", res.data.token);
         console.log(res);
-        let responsePayload = res.data;
-        
-        commit("SET_USER", responsePayload.user);
+        // let responsePayload = res.data;
         commit("SET_SUCCESS", "Logged In");
-
+        dispatch("getUser")
         // Check redirect URL
-         const url = window.location.search
-         console.log(url)
-         const params = new URLSearchParams(url)
-        //  const q = params.get('return_url')
-         const d = params.get('redirectFrom')
-         console.log(d);
+        const url = window.location.search;
+        console.log(url);
+        const params = new URLSearchParams(url);
+        const d = params.get("redirectFrom");
+        console.log(d);
 
-        //  if (q === '/cart') {
-        //    const data = JSON.parse(localStorage.getItem('cart_details'))
-        //    dispatch('addToCart', data)
-        //    dispatch('setUser')
-        //    router.push(q)
-        //  } else {
-        //    router.push(q || d)
-        //  }
-
-         router.push(d || '/account/index')
-        // router.push()
+        router.push(d || "/account/index");
 
         toastify({
           text: `Welcome back`,
@@ -169,53 +155,61 @@ export default {
         }
         commit("SET_ERROR", "Internal connection error, please try again.");
         return error.data;
+      }
+    },
+
+    // Login request
+    async registerUser({ commit }, payload) {
+      NProgress.start();
+      commit("SET_LOADING", true);
+      try {
+        let res = await $request.post(`auth/sign-up`, payload);
+        Cookies.set("token", res.data.access_token);
+        commit("SET_SUCCESS", "Logged In");
+        toastify({
+          text: `Account Created`,
+          className: "info",
+          style: {
+            background: "green",
+            fontSize: "12px",
+            borderRadius: "5px",
+          },
+        }).showToast();
+        dipatch("loginUser", payload);
+        return res;
+      } catch (error) {
+        console.log(error.data);
+        if (error.data) {
+          let errorPayload = error.data;
+          if (errorPayload.message) {
+            commit("SET_ERROR", errorPayload.message);
+            if (errorPayload.errors) {
+              console.log(errorPayload.errors);
+              commit("SET_VALIDATION_ERRORS", errorPayload.errors);
+            }
+            return;
+          }
+        }
+        commit("SET_ERROR", "Internal connection error, please try again.");
+        return error.data;
       } finally {
         NProgress.done();
       }
     },
 
-     // Login request
-     async registerUser({ commit }, payload) {
-        NProgress.start();
-        commit("SET_LOADING", true);
-        try {
-          let res = await $request.post(`auth/sign-up`, payload);
-          Cookies.set("token", res.data.access_token);
-          commit("SET_SUCCESS", "Logged In");
-          toastify({
-            text: `Account Created`,
-            className: "info",
-            style: {
-              background: "green",
-              fontSize: "12px",
-              borderRadius: "5px",
-            },
-          }).showToast();
-          dipatch("loginUser", payload)
-          return res;
-        } catch (error) {
-          console.log(error.data);
-          if (error.data) {
-            let errorPayload = error.data;
-            if (errorPayload.message) {
-              commit("SET_ERROR", errorPayload.message);
-              if (errorPayload.errors) {
-                console.log(errorPayload.errors);
-                commit("SET_VALIDATION_ERRORS", errorPayload.errors);
-              }
-              return;
-            }
-          }
-          commit("SET_ERROR", "Internal connection error, please try again.");
-          return error.data;
-        } finally {
-          NProgress.done();
-        }
-      },
-
-      logout({commit}) {
-        commit('LOGOUT')
-        localStorage.clear()
+    async getUser({ commit }) {
+      try {
+        var responsePayload = await $request.get("/auth/account");
+        console.log(responsePayload);
+        commit("SET_USER", responsePayload.data);
+      } catch (error) {
+        return error;
       }
+    },
+
+    logout({ commit }) {
+      commit("LOGOUT");
+      localStorage.clear();
+    },
   },
 };

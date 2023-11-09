@@ -1,5 +1,5 @@
 import IndexViewVue from "@/views/UserView.vue";
-import ProfileView from "@/modules/User/ProfileView.vue";
+// import ProfileView from "@/modules/User/ProfileView.vue";
 import HistoryView from "@/modules/User/HistoryView.vue";
 import OrderID from "@/modules/User/_id/OrderID.vue";
 import PaymentID from "@/modules/User/_id/PaymentID.vue";
@@ -37,7 +37,7 @@ const router = [
       {
         path: "/account/index",
         name: "user-home-index",
-        component: ProfileView,
+        component: AccountManagement,
         meta: {
           layout: "AppHomeLayout",
           parent: "account",

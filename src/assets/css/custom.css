@@ -306,6 +306,21 @@ form label {
     border-radius: 6px;
 }
 
+.user-status {
+    display: block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+}
+
+.unbanned {
+    background: green;
+}
+
+.banned {
+    background: red;
+}
+
 .in-progress {
     color: purple;
     background-color: rgba(128, 0, 128, 0.175);
