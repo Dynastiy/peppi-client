@@ -67,13 +67,13 @@ export default {
           parent: "history"
         },
 
-        {
-          id: 4,
-          title: "Notifications",
-          icon: "ion:notifications-outline",
-          url: "/account/notifications",
-          parent: "notifications"
-        },
+        // {
+        //   id: 4,
+        //   title: "Notifications",
+        //   icon: "ion:notifications-outline",
+        //   url: "/account/notifications",
+        //   parent: "notifications"
+        // },
 
         
       ],

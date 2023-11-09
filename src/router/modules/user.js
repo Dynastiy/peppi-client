@@ -41,6 +41,7 @@ const router = [
         meta: {
           layout: "AppHomeLayout",
           parent: "account",
+          subParent: "account",
           name: "user-home",
           header: "my account",
           breadcrumb: [
