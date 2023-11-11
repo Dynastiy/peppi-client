@@ -116,7 +116,7 @@ export default {
       commit("SET_LOADING", true);
       try {
         let res = await $request.post(`auth/signin`, payload);
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("peppi_token", res.data.token);
         console.log(res);
         // let responsePayload = res.data;
         commit("SET_SUCCESS", "Logged In");

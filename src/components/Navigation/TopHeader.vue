@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     isLoggedIn() {
-      const accessToken = localStorage.getItem("token");
+      const accessToken = localStorage.getItem("peppi_token");
       return accessToken;
     },
   },

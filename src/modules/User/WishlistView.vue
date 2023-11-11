@@ -11,6 +11,7 @@
         :key="idx"
       >
         <div
+          v-if="item.product !== null"
           class="tw-grid lg:tw-grid-cols-5 lg:tw-grid-cols-4 tw-grid-cols-1 justify-content-between align-items-center"
         >
           <div class="tw-flex tw-gap-2 lg:tw-col-span-4 md:tw-col-span-3">
@@ -68,6 +69,8 @@
             </div>
           </div>
         </div>
+
+        <div v-else>Product no longer exists</div>
       </div>
     </div>
 
@@ -120,7 +123,11 @@ export default {
       this.$request
         .post(`cart/add`, payload)
         .then((res) => {
-          this.$swal.fire("Woa!", `${item.product.name} added to cart.`, "success");
+          this.$swal.fire(
+            "Woa!",
+            `${item.product.name} added to cart.`,
+            "success"
+          );
           this.$store.dispatch("cart/getUserCart");
           this.$emit("reloadData");
           return res;
@@ -154,10 +161,12 @@ export default {
     },
 
     checkItemInCart(value) {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("peppi_token");
       if (token) {
         let cartItems = this.cart;
-        let val = cartItems.filter((elem) => value.product_id === elem.product_id);
+        let val = cartItems.filter(
+          (elem) => value.product_id === elem.product_id
+        );
         console.log(val);
         this.cartItem = val;
         const result = val.length !== 0;

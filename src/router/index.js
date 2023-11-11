@@ -9,9 +9,15 @@ import Auth from "./modules/auth";
 import Home from "./modules/home";
 import User from "./modules/user";
 
+// Page Not found 
+import PageNotFound from "@/modules/ErrorPages/Error404View.vue"
+
 Vue.use(VueRouter);
 
-const routes = [];
+const routes = [
+  // Route for Page Not found 
+  { path: "*", component: PageNotFound },
+];
 
 const router = new VueRouter({
   mode: "history",
@@ -23,7 +29,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  var isLoggedIn = localStorage.getItem('token');
+  var isLoggedIn = localStorage.getItem('peppi_token');
   NProgress.start();
   // Check if the route requires authentication
   if (to.matched.some(record => record.meta.requiresAuth)) {

@@ -25,7 +25,7 @@
         <div class="tw-flex tw-justify-between tw-items-center tw-mb-3" v-else>
           <span class="tw-text-sm tw-font-normal">Delivery Fees:</span>
           <h5 class="tw-font-semibold">
-            {{ totalAmount | formatCurrency }}
+            {{ shippingAmount | formatCurrency }}
           </h5>
         </div>
 
@@ -58,7 +58,10 @@
 export default {
   props: ["pickup_station"],
   data() {
-    return {};
+    return {
+      shipping_amounts: [],
+      overallAmount: "",
+    };
   },
 
   methods: {
@@ -83,15 +86,14 @@ export default {
           this.$router.push(
             `/checkout/${inverseId}?identifier=${resPayload.id}&amount=${this.overallAmount}`
           );
-          // this.pay(resPayload.id)
         })
         .catch((err) => {
-          console.log(err);
+          return err;
         });
-      console.log(payload);
     },
 
     getShippingAmount() {
+      this.shipping_amounts = []
       for (const item of this.cart) {
         this.$request
           .get(
@@ -99,6 +101,8 @@ export default {
           )
           .then((res) => {
             console.log(res.data, "kkk");
+            let resPayload = res.data.weightFees.price;
+            this.shipping_amounts.push(resPayload);
           })
           .catch((err) => {
             console.log(err);
@@ -116,6 +120,12 @@ export default {
       },
       immediate: true,
     },
+
+    shippingAmount: {
+      handler(val) {
+        this.overallAmount = this.cartTotalAmount + val;
+      },
+    },
   },
 
   computed: {
@@ -127,6 +137,14 @@ export default {
       const cartItem = this.cart;
       const totalPrice = cartItem.reduce((accumulator, item) => {
         return accumulator + item.quantity * item.product.price;
+      }, 0);
+      return totalPrice;
+    },
+
+    shippingAmount() {
+      const amounts = this.shipping_amounts;
+      const totalPrice = amounts.reduce((accumulator, item) => {
+        return accumulator + item;
       }, 0);
       return totalPrice;
     },
@@ -150,10 +168,6 @@ export default {
         return accumulator + item.quantity;
       }, 0);
       return totalPrice;
-    },
-
-    overallAmount() {
-      return this.cartTotalAmount + this.totalAmount;
     },
 
     user() {

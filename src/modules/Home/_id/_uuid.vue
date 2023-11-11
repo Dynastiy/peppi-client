@@ -323,7 +323,7 @@ export default {
     },
 
     checkItemInCart() {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("peppi_token");
       if (token) {
         let cartItems = this.cart;
         let val = cartItems.find((elem) => this.product.id === elem.product_id);

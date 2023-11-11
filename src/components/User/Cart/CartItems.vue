@@ -32,7 +32,7 @@
 
       <div class="tw-pt-3">
         <div v-for="(item, idx) in items" :key="idx" class="">
-          <div class="tw-flex tw-gap-1">
+          <div class="tw-flex tw-gap-1" v-if="item.products !== null">
             <div class="lg:tw-w-[80px] md:tw-w-[80px] tw-w-[150px]">
               <img
                 class="tw-block lg:tw-w-[60px] md:tw-w-[60px] tw-w-[100px] lg:tw-h-[60px] md:tw-h-[60px] tw-h-[100px] tw-border tw-border-gray400 tw-p-[5px] tw-object-cover"
@@ -91,6 +91,7 @@
               </div>
             </div>
           </div>
+          <div v-else>Product no longer exists</div>
           <hr class="tw-my-3" />
         </div>
       </div>

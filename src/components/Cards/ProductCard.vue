@@ -174,7 +174,7 @@ export default {
     },
 
     checkItemInWishlist(value) {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("peppi_token");
       if (token) {
         let wishlistItems = this.wishlist;
         let val = wishlistItems.filter((elem) => value === elem.product_id);
@@ -192,7 +192,7 @@ export default {
     },
 
     checkItemInCart(value) {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("peppi_token");
       if (token) {
         let cartItems = this.cart;
         let val = cartItems.filter((elem) => value === elem.product_id);

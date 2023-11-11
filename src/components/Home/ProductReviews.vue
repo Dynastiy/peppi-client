@@ -377,7 +377,7 @@ export default {
     },
 
     isLoggedIn() {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("peppi_token");
       return token;
     },
 

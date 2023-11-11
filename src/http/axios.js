@@ -18,7 +18,7 @@ const $axios = axios.create({
 });
 // Add access token to header if any
 // const accessToken = Cookies.get(config.accessTokenStorageKey);
-const accessToken = localStorage.getItem("token");
+const accessToken = localStorage.getItem("peppi_token");
 if (accessToken) {
   $axios.defaults.headers.common["Authorization"] = "bearer " + accessToken;
 } else {
@@ -32,7 +32,7 @@ $axios.interceptors.request.use(
     NProgress.start();
     // Add access token to header before request is sent if any
     // const accessToken = Cookies.get(config.accessTokenStorageKey);
-    const accessToken = localStorage.getItem("token");
+    const accessToken = localStorage.getItem("peppi_token");
     if (accessToken) {
       axiosConfig.headers.Authorization = "bearer " + accessToken;
     } else {

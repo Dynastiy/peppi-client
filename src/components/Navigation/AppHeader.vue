@@ -14,8 +14,8 @@
       <div
         class="lg:tw-justify-self-center md:tw-justify-self-center tw-justify-self-start"
       >
-        <img src="@/assets/img/peppi-logo.png" class="lg:tw-block md:tw-block tw-hidden" role="button" @click="$router.push('/')" width="80" alt="" />
-        <img src="@/assets/img/peppi-icon.png" role="button" class="lg:tw-hidden md:tw-hidden tw-block" @click="$router.push('/')" width="40" alt="" />
+        <img src="@/assets/img/peppi-logo.png" class="lg:tw-block md:tw-block tw-hidden" role="button" @click="$router.push('/').catch(()=>{})" width="80" alt="" />
+        <img src="@/assets/img/peppi-icon.png" role="button" class="lg:tw-hidden md:tw-hidden tw-block" @click="$router.push('/').catch(()=>{})" width="40" alt="" />
       </div>
 
       <div class="tw-justify-self-end">
