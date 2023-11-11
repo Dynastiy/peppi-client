@@ -37,7 +37,7 @@ export default {
         phone: "",
         amount: overallAmount,
         title: `Payment for ${this.cart.length} items`,
-        description: `Payment for ${this.cart.length} items worth ${Number(
+        description: `Payment of ${Number(
           overallAmount
         ).toLocaleString("en-US", {
           style: "currency",

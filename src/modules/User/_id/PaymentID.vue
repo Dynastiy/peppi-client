@@ -98,7 +98,7 @@
             </div>
           </div> -->
       </div>
-      <hr class="tw-my-4 tw-border-gray400 lg:tw-w-2/5 md:tw-w-2/5 tw-w-full tw-ml-auto" />
+      <!-- <hr class="tw-my-4 tw-border-gray400 lg:tw-w-2/5 md:tw-w-2/5 tw-w-full tw-ml-auto" />
       <div class="tw-flex tw-flex-col tw-gap-3">
           <span
             v-for="(name, value) in filterData"
@@ -108,7 +108,7 @@
             <span class="tw-text-sm">{{ value }}</span>
             <span class="tw-text-sm">{{ name }}</span>
           </span>
-        </div>
+        </div> -->
       <hr class="tw-my-4 tw-border-gray400 lg:tw-w-2/5 md:tw-w-2/5 tw-w-full tw-ml-auto" />
       <span class="tw-flex tw-justify-between lg:tw-w-2/5 md:tw-w-2/5 tw-w-full tw-ml-auto">
           <span class="tw-text-sm">Order Total</span>

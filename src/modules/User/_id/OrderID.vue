@@ -79,11 +79,8 @@
           </div>
         </div>
       </div>
-      <hr class="tw-my-4 tw-border-gray400" />
+      <!-- <hr class="tw-my-4 tw-border-gray400" />
       <div class="tw-flex tw-flex-col tw-gap-3">
-        <!-- <div>
-        {{ filterData }}
-      </div> -->
         <span
           v-for="(name, value) in filterData"
           :key="name"
@@ -92,7 +89,7 @@
           <span class="tw-text-sm">{{ value }}</span>
           <span class="tw-text-sm">{{ name }}</span>
         </span>
-      </div>
+      </div> -->
       <hr class="tw-my-4 tw-border-gray400" />
       <span class="tw-flex tw-justify-between">
         <span class="tw-text-sm">Order Total</span>
