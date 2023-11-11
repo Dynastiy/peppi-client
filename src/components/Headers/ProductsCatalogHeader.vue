@@ -13,7 +13,7 @@
       </span>
     </b-skeleton-wrapper>
 
-    <div class="tw-flex tw-justify-end tw-full">
+    <!-- <div class="tw-flex tw-justify-end tw-full">
       <el-dropdown
         trigger="click"
         placement="bottom-end"
@@ -38,7 +38,7 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-    </div>
+    </div> -->
   </div>
 </template>
 
