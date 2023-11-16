@@ -3,15 +3,16 @@
     <div class="tw-flex tw-items-center tw-justify-between tw-p-3">
       <div>
         <span class="tw-flex tw-space-x-3">
-          <a href="/">
+          <a href="https://www.facebook.com/peppy.stores?mibextid=kFxxJD" target="_blank">
             <i-icon icon="bxl:facebook" class="top-header-icon" />
           </a>
-          <a href="/">
-            <i-icon icon="mdi:twitter" class="top-header-icon" />
-          </a>
-          <a href="/">
+          <a href="https://instagram.com/peppystores_1" target="_blank">
             <i-icon icon="raphael:instagram" class="top-header-icon" />
           </a>
+          <a href="https://www.tiktok.com/@peppystores2022?_t=8hIyfSsYCz0&_r=1" target="_blank">
+            <i-icon icon="ic:baseline-tiktok" class="top-header-icon" />
+          </a>
+          
         </span>
       </div>
       <div class="tw-hidden lg:tw-block md:tw-block">

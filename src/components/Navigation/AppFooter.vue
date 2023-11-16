@@ -50,35 +50,35 @@
               <div class="mt-4">
                 <h6 class="tw-text-gray400 tw-text-sm">Social Media</h6>
                 <div class="d-flex mt-2" style="gap: 10px">
-                  <a target="_blank" href="/">
+                  <!-- <a target="_blank" href="/">
                     <i
                       class="fa fa-youtube-play text-danger"
                       style="font-size: 18px"
                       aria-hidden="true"
                     ></i>
-                  </a>
-                  <a target="_blank" href="/">
+                  </a> -->
+                  <!-- <a target="_blank" href="/">
                     <i
                       class="fa fa-twitter text-info"
                       style="font-size: 18px"
                       aria-hidden="true"
                     ></i>
-                  </a>
-                  <a target="_blank" href="/">
+                  </a> -->
+                  <a target="_blank" href="https://www.facebook.com/peppy.stores?mibextid=kFxxJD">
                     <i
                       class="fa fa-facebook text-primary"
                       style="font-size: 18px"
                       aria-hidden="true"
                     ></i>
                   </a>
-                  <a target="_blank" href="/">
+                  <a target="_blank" href="https://instagram.com/peppystores_1">
                     <i
                       class="fa fa-instagram text-danger"
                       style="font-size: 18px"
                       aria-hidden="true"
                     ></i>
                   </a>
-                  <a target="_blank" class="text-white" href="">
+                  <a target="_blank" class="text-white" href="https://www.tiktok.com/@peppystores2022?_t=8hIyfSsYCz0&_r=1">
                     <i-icon icon="ic:baseline-tiktok" width="18px" />
                   </a>
                 </div>
