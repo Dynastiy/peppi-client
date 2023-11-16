@@ -1,5 +1,9 @@
 
 import IndexViewVue from "@/modules/Home/IndexView.vue";
+import TermsAndConditions from "@/modules/Home/TermsAndConditions.vue";
+import PrivacyPolicy from "@/modules/Home/PrivacyPolicy.vue";
+import Careers from "@/modules/Home/CareersPage.vue";
+
 import CartView from "@/modules/Home/CartView.vue";
 import ProductDetails from "@/modules/Home/_id/_uuid.vue"
 
@@ -187,7 +191,49 @@ const router = [
       requiresAuth: false,
       hasHeader: false
     },
-  }
+  },
+
+  {
+    path: "/terms-and-conditions",
+    name: "terms-and-conditions",
+    component: TermsAndConditions,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "terms-and-conditions",
+      name: "terms-and-conditions",
+      header: "Terms and Conditions",
+      hasHeader: true,
+      requiresAuth: false,
+    },
+  },
+
+  {
+    path: "/careers",
+    name: "careers",
+    component: Careers,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "careers",
+      name: "careers",
+      header: "Careers",
+      hasHeader: true,
+      requiresAuth: false,
+    },
+  },
+
+  {
+    path: "/privacy-policy",
+    name: "privacy-policy",
+    component: PrivacyPolicy,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "privacy-policy",
+      name: "privacy-policy",
+      header: "Privacy Policy",
+      hasHeader: true,
+      requiresAuth: false,
+    },
+  },
 ];
 
 export default router;

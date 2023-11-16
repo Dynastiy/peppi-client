@@ -23,7 +23,7 @@
                   >
                 </li>
                 <li><router-link to="/careers">Careers</router-link></li>
-                <li><router-link to="/careers">Contact Us</router-link></li>
+                <li><router-link to="/contact-us">Contact Us</router-link></li>
               </ul>
             </div>
 
@@ -121,5 +121,9 @@ ul li a {
   color: var(--gray-400);
   font-size: 13px;
   text-decoration: unset;
+}
+
+ul li .router-link-exact-active {
+  color: var(--primary);
 }
 </style>

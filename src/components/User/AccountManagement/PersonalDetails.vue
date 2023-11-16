@@ -26,9 +26,10 @@
               name="choose-file"
               class="tw-p-0"
             />
-            <label class="m-0" for="choose-file"
-              ><label class="m-0" for="choose-file"
+            <label class="m-0" for="choose-file" 
+              ><label class="m-0" for="choose-file" 
                 ><i-icon
+                role="button"
                   icon="mdi:edit-circle"
                   class="file--icons tw-text-primary tw-text-2xl tw-bg-white tw-rounded-full"
                 />
@@ -260,6 +261,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          this.$swal.fire("Owch!", `${err.data.message}`, "warning");
           this.errors = err.data.errors;
         });
     },
@@ -276,6 +278,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          this.$swal.fire("Owch!", `${err.data.message}`, "warning");
           this.errors = err.data.errors;
         });
     },

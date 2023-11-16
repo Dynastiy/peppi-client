@@ -10,7 +10,11 @@
       </div>
       <validation-observer v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(onSubmit)">
-          <span v-if="error" class="tw-mb-3 error-alert tw-text-red-600 tw-text-xs">{{ error }}</span>
+          <span
+            v-if="error"
+            class="tw-mb-3 error-alert tw-text-red-600 tw-text-xs"
+            >{{ error }}</span
+          >
 
           <div>
             <validation-provider
@@ -49,7 +53,12 @@
               rules="required"
               v-slot="{ dirty, invalid, errors }"
             >
-              <label for="password">Password</label>
+              <div class="tw-flex tw-justify-between">
+                <label for="password">Password</label>
+                <span role="button" @click="forgotPassword" class="tw-text-[11px] tw-font-semibold tw-text-primary"
+                  >Forgot Password?
+                </span>
+              </div>
               <div
                 class="input-field"
                 :class="{
@@ -135,16 +144,19 @@ export default {
       };
       console.log(credentials);
       // this.$router.push('/account')
-      this.loginUser(credentials)
-      .then(()=> {
-        this.getUserCatalog()
-      })
+      this.loginUser(credentials).then(() => {
+        this.getUserCatalog();
+      });
     },
 
-    getUserCatalog(){
-      this.$store.dispatch('cart/getUserCart')
-      this.$store.dispatch('cart/getUserWishlist')
-    }
+    forgotPassword(){
+      this.$router.push('/forgot-password')
+    },
+
+    getUserCatalog() {
+      this.$store.dispatch("cart/getUserCart");
+      this.$store.dispatch("cart/getUserWishlist");
+    },
   },
 
   mounted() {

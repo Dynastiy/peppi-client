@@ -54,9 +54,20 @@ export default {
     },
 
     userLogout() {
-      this.$swal.fire("Woo hoo 😫!", "Loged out succesfully.", "success");
       this.$store.dispatch("auth/logout");
-      this.$router.go();
+      this.$swal
+        .fire({
+          title: "Woo hoo 😫",
+          text: "Logged out succesfully",
+          icon: "success",
+          confirmButtonText: "Ok!",
+        })
+        .then((result) => {
+          console.log(result, "kkk");
+          if (result.isConfirmed) {
+            this.$router.go();
+          }
+        });
     },
   },
   computed: {
