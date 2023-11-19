@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <footer class="tw-bg-dark-100 tw-px-6 tw-py-12 tw-mt-8">
+      <footer class="tw-bg-secondary tw-px-6 tw-py-12 tw-mt-8">
         <div class="">
           <div class="tw-grid lg:tw-grid-cols-4 md:tw-grid-cols-2 tw-grid-cols-1 tw-gap-5">
             <div class="">

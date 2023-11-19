@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tw-shadow-lg tw-p-6 tw-rounded-lg">
     <div class="tw-relative">
       <img
         class="tw-h-72 lg:tw tw-w-9/12 tw-object-cover tw-mx-auto tw-block"

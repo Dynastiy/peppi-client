@@ -6,8 +6,10 @@
     >
       <div class="lg:tw-px-8 md:tw-px-7 tw-px-5">
         <app-header :menu="menu" @toggleDrawer="toggleDrawer"/>
-        <page-header v-if="routeHeader"/>
+        <div>
+          <page-header v-if="routeHeader"/>
       <slot />
+        </div>
       </div>
       <app-footer />
 

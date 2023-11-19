@@ -17,6 +17,7 @@ module.exports = {
     colors: {
       /* Primary Theme  */
       primary: "#F9A51A",
+      secondary: "#5C2D8D",
 
       /* Gray Theme  */
       "gray100": "#fffcf8",
