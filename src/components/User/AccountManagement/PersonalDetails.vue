@@ -9,9 +9,8 @@
         <div class="tw-w-fit tw-relative tw-mx-auto">
           <img
             :src="profile.profile_photo"
-            width="80"
-            height="80"
-            class="tw-rounded-full tw-object-fit tw-object-center tw-mx-auto"
+            style= "width:80px; height:80px; object-position: top;"
+            class="tw-rounded-full tw-object-cover tw-mx-auto"
             alt=""
           />
           <div

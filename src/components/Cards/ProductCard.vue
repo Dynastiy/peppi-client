@@ -9,13 +9,15 @@
       <div
         class="tw-absolute tw-top-0 tw-right-0 tw-flex tw-flex-col tw-space-y-1"
       >
-        <span
+        <!-- <span
           class="tw-bg-red-400 tw-px-1 tw-py-1 tw-rounded-sm tw-uppercase tw-tracking-widest tw-text-xs"
           >new</span
-        >
+        > -->
         <span
           class="tw-bg-green-400 tw-px-1 tw-py-1 tw-rounded-sm tw-uppercase tw-tracking-widest tw-text-xs"
-          >sale</span
+          >
+          {{ item.availability === 'yes' ? 'In stock' : 'out of stock' }}
+          </span
         >
       </div>
     </div>

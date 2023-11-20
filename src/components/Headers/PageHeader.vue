@@ -56,17 +56,17 @@ export default {
   },
 
   watch: {
-    "$route.params": {
-      handler(val) {
-        if (val.id) {
-          let breadcrumb = {
-            text: val.id,
-          };
-          this.updateList(breadcrumb);
-        }
-      },
-      immediate: true,
-    },
+    // "$route.params": {
+    //   handler(val) {
+    //     if (val.id) {
+    //       let breadcrumb = {
+    //         text: val.id,
+    //       };
+    //       this.updateList(breadcrumb);
+    //     }
+    //   },
+    //   immediate: true,
+    // },
   },
 
   computed: {
