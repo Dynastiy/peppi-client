@@ -20,7 +20,7 @@
         <div
           v-for="(item, idx) in items"
           :key="idx"
-          class="tw-bg-gray200 tw-shadow"
+          class="tw-bg-gray200 tw-flex tw-flex-col tw-justify-between tw-shadow"
         >
           <div
             class="tw-flex tw-flex-col tw-items-center tw-p-6"
@@ -28,13 +28,13 @@
             role="button"
           >
             <div class="tw-w-fit">
-              <img :src="item.icon_image" alt="" class="tw-w-20 tw-h-20" />
+              <img :src="item.icon_image" alt="" class="tw-w-20 tw-h-20 tw-rounded-full tw-object-fit tw-object-top" />
             </div>
-            <h6 class="tw-mb-0 tw-font-medium tw-mt-3 tw-capitalize tw-text-sm">
-              {{ item.category_name }}
+            <h6 class="tw-mb-0 tw-font-medium tw-mt-3 tw-text-center tw-capitalize tw-text-sm">
+              {{ (item.category_name)}}
             </h6>
           </div>
-          <div class="tw-bg-dark-100 tw-p-2 tw-text-center">
+          <div class="tw-bg-dark-100 tw-p-2 tw-text-center tyw-justify-self-end">
             <h6 class="tw-mb-0 tw-text-gray100 tw-text-light tw-text-sm">
               {{ item.products.length }} {{ item.products.length > 0 ? "Products" : "Product" }}
             </h6>

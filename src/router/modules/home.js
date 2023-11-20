@@ -102,7 +102,6 @@ const router = [
       parent: "home",
       name: "cart",
       header: "Cart",
-      requiresAuth: true,
       hasHeader: true,
       breadcrumb: [
         {

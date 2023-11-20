@@ -4,9 +4,9 @@
     <div
       class="tw-bg-white lg:tw-shadow-lg md:tw-shadow-lg tw-shadow-sm tw-rounded-md"
     >
-      <div class="lg:tw-px-8 md:tw-px-7 tw-px-5">
+      <div >
         <app-header :menu="menu" @toggleDrawer="toggleDrawer"/>
-        <div>
+        <div class="lg:tw-px-8 md:tw-px-7 tw-px-5 tw-mt-8">
           <page-header v-if="routeHeader"/>
       <slot />
         </div>
@@ -48,7 +48,7 @@ export default {
         },
         {
           id: 3,
-          title: "contact us",
+          title: "contact",
           url: "/contact-us",
           icon: "streamline:interface-help-customer-support-2-customer-headphones-headset-help-microphone-phone-person-support",
           hasChildren: false,

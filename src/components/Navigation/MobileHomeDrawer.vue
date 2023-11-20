@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-drawer :visible.sync="drawerVisible" :with-header="false" size="80%">
-      <div class="tw-h-full tw-bg-dark-100">
+      <div class="tw-h-full tw-bg-secondary">
         <div class="tw-flex tw-p-8 tw-justify-end tw-mb-8 tw-bg-dark-400 tw-shadow">
           <span @click="$emit('close')" role="button">
             <i-icon icon="codicon:close" class="tw-text-primary" width="25px" />
