@@ -1,12 +1,12 @@
 <template>
   <div>
     <video
-      v-if="video !== null"
+      v-if="item.video !== null"
       :src="item.video.url"
       controls
       style="width: 100%"
     ></video>
-    <h6 v-else>No video for this product</h6>
+    <h6 v-else>No video preview for this product</h6>
   </div>
 </template>
 

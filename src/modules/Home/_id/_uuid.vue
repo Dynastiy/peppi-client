@@ -76,13 +76,14 @@
               alt=""
             />
           </div>
-          <div class="tw-flex tw-flex-col tw-space-y-4">
+          <div class="tw-flex tw-flex-col tw-gap-4">
+            
             <h3
-              class="tw-tracking-widest tw-uppercase tw-mb-0 tw-text-lg tw-font-light"
+              class="tw-tracking-widest tw-uppercase lg:tw-text-left md:tw-text-left tw-text-center tw-mb-0 tw-text-lg tw-font-light"
             >
               {{ product.name }}
             </h3>
-            <h3 class="tw-text-lg tw-font-semibold">
+            <h3 class="tw-text-lg tw-font-semibold lg:tw-text-left md:tw-text-left tw-text-center">
               {{
                 Number(amount).toLocaleString("en-US", {
                   style: "currency",
@@ -214,56 +215,83 @@ export default {
     },
 
     cartAction() {
-      this.checkItemInCart > 0
+      console.log(this.checkItemInCart, 'na wa oooo');
+      this.checkItemInCart
         ? this.updateCartItem()
         : this.addToCart();
     },
+
 
     addToCart() {
       this.busy = false;
       let payload = {
         quantity: this.quantity,
         product_id: this.id,
+        product: this.product,
       };
-      this.$request
-        .post(`cart/add`, payload)
-        .then((res) => {
-          this.$swal.fire(
-            "Woa!",
-            `${this.product.name} added to cart.`,
-            "success"
-          );
-          this.$store.dispatch("cart/getUserCart");
-          return res;
-        })
-        .catch((err) => {
-          if (err.data.message === 'Attempt to read property "id" on null') {
-            this.$router.push("/sign-in?redirectFrom=" + this.route);
-          }
-          console.log(err.data.message);
-        });
+      this.$store.dispatch("cart/addToCart", payload).then(() => {
+        this.$emit("reloadData");
+      });
     },
 
     updateCartItem() {
-      let payload = {
-        quantity: this.quantity,
-        product_id: this.id,
-      };
-      this.$request
-        .post(`cart/update/${this.checkItemInCart.id}`, payload)
-        .then((res) => {
-          this.$swal.fire(
-            "Nice!",
-            `${this.product.name} updated in cart.`,
-            "success"
-          );
-          this.$store.dispatch("cart/getUserCart");
-          return res;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const index = this.cart.findIndex(item => item.product_id === this.checkItemInCart.product_id)
+      // const quantity = Number(this.checkItemInCart.quantity) + 1
+
+      // Create an updatedItem object with the new values
+      var payload = { ...this.checkItemInCart, quantity: this.quantity };
+
+      // Dispatch the updateItem action from the cart module
+      this.$store.dispatch('cart/updateCartItem', { index, payload }).then(() => {
+        this.$emit("reloadData");
+      });
     },
+
+    // addToCart() {
+    //   this.busy = false;
+    //   let payload = {
+    //     quantity: this.quantity,
+    //     product_id: this.id,
+    //   };
+    //   this.$request
+    //     .post(`cart/add`, payload)
+    //     .then((res) => {
+    //       this.$swal.fire(
+    //         "Woa!",
+    //         `${this.product.name} added to cart.`,
+    //         "success"
+    //       );
+    //       this.$store.dispatch("cart/getUserCart");
+    //       return res;
+    //     })
+    //     .catch((err) => {
+    //       if (err.data.message === 'Attempt to read property "id" on null') {
+    //         this.$router.push("/sign-in?redirectFrom=" + this.route);
+    //       }
+    //       console.log(err.data.message);
+    //     });
+    // },
+
+    // updateCartItem() {
+    //   let payload = {
+    //     quantity: this.quantity,
+    //     product_id: this.id,
+    //   };
+    //   this.$request
+    //     .post(`cart/update/${this.checkItemInCart.id}`, payload)
+    //     .then((res) => {
+    //       this.$swal.fire(
+    //         "Nice!",
+    //         `${this.product.name} updated in cart.`,
+    //         "success"
+    //       );
+    //       this.$store.dispatch("cart/getUserCart");
+    //       return res;
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
 
     selectImage(e) {
       this.activeImage = e;
@@ -323,16 +351,9 @@ export default {
     },
 
     checkItemInCart() {
-      const token = localStorage.getItem("peppi_token");
-      if (token) {
         let cartItems = this.cart;
         let val = cartItems.find((elem) => this.product.id === elem.product_id);
-        // console.log(val);
-        // const result = val.length !== 0;
         return val;
-      } else {
-        return {};
-      }
     },
   },
 };

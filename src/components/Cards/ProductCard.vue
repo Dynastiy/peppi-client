@@ -15,20 +15,19 @@
         > -->
         <span
           class="tw-bg-green-400 tw-px-1 tw-py-1 tw-rounded-sm tw-uppercase tw-tracking-widest tw-text-xs"
-          >
-          {{ item.availability === 'yes' ? 'In stock' : 'out of stock' }}
-          </span
         >
+          {{ item.availability === "yes" ? "In stock" : "out of stock" }}
+        </span>
       </div>
     </div>
     <div class="tw-flex tw-flex-col tw-space-y-3 tw-items-center tw-mt-3">
       <span
         role="button"
         @click="$router.push(`/product/${item.id}`)"
-        class="tw-block tw-uppercase tw-tracking-widest hover:tw-text-primary tw-ease-in-out tw-duration-1000"
+        class="tw-block tw-uppercase lg:tw-text-left md:tw-text-left tw-text-center tw-tracking-widest hover:tw-text-primary tw-ease-in-out tw-duration-1000"
         >{{ item.name }}</span
       >
-      <span class="tw-block tw-uppercase tw-font-semibold tw-font-medium">{{
+      <span class="tw-block tw-uppercase lg:tw-text-left md:tw-text-left tw-text-center tw-font-semibold tw-font-medium">{{
         item.price | formatCurrency
       }}</span>
       <div class="tw-flex tw-gap-4 tw-items-center">
@@ -86,49 +85,24 @@ export default {
       let payload = {
         quantity: 1,
         product_id: this.item.id,
+        product: this.item,
       };
-      this.$request
-        .post(`cart/add`, payload)
-        .then((res) => {
-          this.$swal.fire(
-            "Woa!",
-            `${this.item.name} added to cart.`,
-            "success"
-          );
-          this.$store.dispatch("cart/getUserCart");
-          this.$emit("reloadData");
-          return res;
-        })
-        .catch((err) => {
-          if (err.data.message === 'Attempt to read property "id" on null') {
-            this.$router.push("/sign-in");
-          }
-          console.log(err.data.message);
-        });
+      this.$store.dispatch("cart/addToCart", payload).then(() => {
+        this.$emit("reloadData");
+      });
     },
 
     updateCartItem() {
-      console.log(this.cartItem[0], "mmm");
-      const id = this.cartItem[0].id;
-      let payload = {
-        quantity: Number(this.cartItem[0].quantity) + 1,
-        product_id: this.item.id,
-      };
-      this.$request
-        .post(`cart/update/${id}`, payload)
-        .then((res) => {
-          this.$swal.fire(
-            "Nice!",
-            `${this.item.name} updated in cart.`,
-            "success"
-          );
-          this.$store.dispatch("cart/getUserCart");
-          this.$emit("reloadData");
-          return res;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const index = this.cart.findIndex(item => item.product_id === this.cartItem[0].product_id)
+      const quantity = Number(this.cartItem[0].quantity) + 1
+
+      // Create an updatedItem object with the new values
+      var payload = { ...this.cartItem[0], quantity: quantity };
+
+      // Dispatch the updateItem action from the cart module
+      this.$store.dispatch('cart/updateCartItem', { index, payload }).then(() => {
+        this.$emit("reloadData");
+      });
     },
 
     removeItemFromWishlist() {
@@ -194,17 +168,11 @@ export default {
     },
 
     checkItemInCart(value) {
-      const token = localStorage.getItem("peppi_token");
-      if (token) {
-        let cartItems = this.cart;
-        let val = cartItems.filter((elem) => value === elem.product_id);
-        // console.log(val);
-        this.cartItem = val;
-        const result = val.length !== 0;
-        return result;
-      } else {
-        return false;
-      }
+      let cartItems = this.cart;
+      let val = cartItems.filter((elem) => value === elem.product_id);
+      this.cartItem = val;
+      const result = val.length !== 0;
+      return result;
     },
   },
 

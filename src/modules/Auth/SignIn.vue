@@ -55,7 +55,10 @@
             >
               <div class="tw-flex tw-justify-between">
                 <label for="password">Password</label>
-                <span role="button" @click="forgotPassword" class="tw-text-[11px] tw-font-semibold tw-text-primary"
+                <span
+                  role="button"
+                  @click="forgotPassword"
+                  class="tw-text-[11px] tw-font-semibold tw-text-primary"
                   >Forgot Password?
                 </span>
               </div>
@@ -145,12 +148,14 @@ export default {
       console.log(credentials);
       // this.$router.push('/account')
       this.loginUser(credentials).then(() => {
-        this.getUserCatalog();
+        if (this.cart.length === 0) {
+          this.getUserCatalog();
+        }
       });
     },
 
-    forgotPassword(){
-      this.$router.push('/forgot-password')
+    forgotPassword() {
+      this.$router.push("/forgot-password");
     },
 
     getUserCatalog() {
@@ -166,6 +171,9 @@ export default {
   watch: {},
 
   computed: {
+    cart() {
+      return this.$store.getters["cart/getCartItems"];
+    },
     ...mapState("auth", {
       loading: (state) => state.loading,
       error: (state) => state.error,

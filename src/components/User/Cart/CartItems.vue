@@ -32,7 +32,7 @@
 
       <div class="tw-pt-3">
         <div v-for="(item, idx) in items" :key="idx" class="">
-          <div class="tw-flex tw-gap-1" v-if="item.products !== null">
+          <div class="tw-flex tw-gap-1" v-if="item.product !== null">
             <div class="lg:tw-w-[80px] md:tw-w-[80px] tw-w-[150px]">
               <img
                 class="tw-block lg:tw-w-[60px] md:tw-w-[60px] tw-w-[100px] lg:tw-h-[60px] md:tw-h-[60px] tw-h-[100px] tw-border tw-border-gray400 tw-p-[5px] tw-object-cover"
@@ -54,14 +54,14 @@
               </div>
               <div class="col-md-3">
                 <h5 class="tw-text-[15px] tw-mb-0">
-                  {{item.product.price | formatCurrency}}
+                  {{ item.product.price | formatCurrency }}
                 </h5>
               </div>
               <div class="col-md-2">
                 <div class="">
                   <div class="toggle--amount">
                     <input
-                    @keyup="updateCartItem(item)"
+                      @input="updateCartItem(item)"
                       type="tel"
                       placeholder="0"
                       v-model="item.quantity"
@@ -72,8 +72,7 @@
               </div>
               <div class="col-md-3">
                 <h5 class="tw-text-[15px] tw-mb-0">
-                  {{
-                    (item.quantity * item.product.price) | formatCurrency}}
+                  {{ (item.quantity * item.product.price) | formatCurrency }}
                 </h5>
               </div>
               <div class="col-md-1">
@@ -91,7 +90,20 @@
               </div>
             </div>
           </div>
-          <div v-else>Product no longer exists</div>
+          <div v-else>
+            <span>Product no longer exists</span>
+            <span
+              role="button"
+              class="tw-shadow-lg tw-block tw-bg-gray200 tw-w-fit tw-p-2 tw-rounded-md"
+              @click="$emit('remove', item)"
+            >
+              <i-icon
+                icon="fluent:delete-32-regular"
+                class="tw-text-red-600"
+                width="20px"
+              />
+            </span>
+          </div>
           <hr class="tw-my-3" />
         </div>
       </div>
@@ -134,6 +146,7 @@ export default {
   data() {
     return {
       displayKey: ["quantity"],
+      quantity: null,
     };
   },
 
@@ -143,19 +156,36 @@ export default {
     },
 
     updateCartItem(e) {
-      const id = e.id;
-      let payload = {
-        quantity: e.quantity,
-        product_id: e.product.product_id,
-      };
-      this.$request
-        .post(`cart/update/${id}`, payload)
-        .then((res) => {
-          this.$store.dispatch("cart/getUserCart");
-          return res;
-        })
-        .catch((err) => {
-          console.log(err);
+      // const id = e.id;
+      // let payload = {
+      //   quantity: e.quantity,
+      //   product_id: e.product.product_id,
+      // };
+      // this.$request
+      //   .post(`cart/update/${id}`, payload)
+      //   .then((res) => {
+      //     this.$store.dispatch("cart/getUserCart");
+      //     return res;
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+
+      const index = this.cart.findIndex(
+        (item) => item.product_id === e.product_id
+      );
+      // const quantity = Number(e.quantity);
+
+      // Create an updatedItem object with the new values
+      // const cart = this.$store.getters["cart/getCartItems"];
+      console.log(this.cart[index], "ommmo");
+      var payload = { ...this.cart[index] };
+
+      // Dispatch the updateItem action from the cart module
+      this.$store
+        .dispatch("cart/updateCartItem", { index, payload })
+        .then(() => {
+          this.$emit("reloadData");
         });
     },
 
@@ -182,16 +212,23 @@ export default {
       return result;
     },
   },
-  // watch: {
-  //   items: {
-  //     handler: function(newVal) {
-  //       newVal.find(function (item) {
-  //         console.log(item, "mmmmm");
-  //       });
-  //     }
-  //   }
-  // },
-  computed: {},
+  watch: {
+    // cart: {
+    //   handler: function(newVal) {
+    //     newVal.find(function (item) {
+    //       console.log(item, "mmmmm");
+    //       this.quantity = item.quantity
+    //     });
+    //   },
+    //   immediate: true,
+    //   deep: true
+    // }
+  },
+  computed: {
+    cart() {
+      return this.$store.getters["cart/getCartItems"];
+    },
+  },
 };
 </script>
 
