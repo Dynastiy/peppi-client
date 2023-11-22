@@ -72,7 +72,7 @@
           <div>
             <img
               class="tw-h-80 lg:tw tw-w-full tw-object-cover tw-mx-auto tw-block"
-              :src="activeImage.url"
+              :src="product.images.length > 0 ? activeImage.url : require('@/assets/img/peppi-icon.png')"
               alt=""
             />
           </div>

@@ -3,7 +3,7 @@
     <div class="tw-relative">
       <img
         class="tw-h-72 lg:tw tw-w-9/12 tw-object-cover tw-mx-auto tw-block"
-        :src="item.images[0].url"
+        :src="item.images.length > 0 ? item.images[0].url : require('@/assets/img/peppi-icon.png')"
         alt=""
       />
       <div
@@ -14,7 +14,8 @@
           >new</span
         > -->
         <span
-          class="tw-bg-green-400 tw-px-1 tw-py-1 tw-rounded-sm tw-uppercase tw-tracking-widest tw-text-xs"
+          class="tw-px-1 tw-py-1 tw-rounded-sm tw-uppercase tw-tracking-widest tw-text-xs"
+          :class="[item.availability === 'yes' ? 'tw-bg-green-400' : 'tw-bg-red-400']"
         >
           {{ item.availability === "yes" ? "In stock" : "out of stock" }}
         </span>

@@ -1,16 +1,45 @@
 <template>
-  <div
+  <!-- <div
     class="tw-grid lg:tw-grid-cols-2 tw-gap-2 lg:tw-grid-cols-2 tw-justify-between tw-items-center"
-  >
+  > -->
+  <div>
     <b-skeleton-wrapper :loading="loading">
       <template #loading>
         <b-skeleton width="40%"></b-skeleton>
       </template>
-      <span v-if="isPaginated"
-        class="tw-full tw-text-sm tw-uppercase tw-tracking-widest tw-text-dark-100"
-        >showing {{ from }} - {{ to }} of {{ total }} result{{ total > 1 ? "s": "" }}
-        <!-- Showing {{ ((currentPage - 1) * perPage) + items.length }} / {{ totalRecords }} -->
-      </span>
+      <div
+        v-if="isPaginated"
+        class="tw-flex tw-justify-between tw-items-center"
+      >
+        <span
+          class="tw-w-full tw-text-sm tw-uppercase tw-tracking-widest tw-text-dark-100"
+          >showing {{ from }} - {{ to }} of {{ total }} result{{
+            total > 1 ? "s" : ""
+          }}
+          <!-- Showing {{ ((currentPage - 1) * perPage) + items.length }} / {{ totalRecords }} -->
+        </span>
+
+        <span class="tw-flex tw-gap-4 tw-justify-end tw-w-full tw-items-center">
+          <button
+            class="tw-px-2 tw-py-1"
+            :disabled="currentPage === 1"
+            :class="[currentPage === 1 ? 'tw-bg-gray400' : 'tw-bg-primary']"
+            @click="$emit('prev')"
+          >
+            &laquo;
+          </button>
+          <button
+            class="tw-px-2 tw-py-1"
+            :disabled="Number(currentPage) == Number(lastPage)"
+            :class="[
+              Number(currentPage) == Number(lastPage) ? 'tw-bg-gray400' : 'tw-bg-primary',
+            ]"
+            @click="$emit('next')"
+          >
+            &raquo;
+          </button>
+        </span>
+      </div>
     </b-skeleton-wrapper>
 
     <!-- <div class="tw-flex tw-justify-end tw-full">
@@ -46,16 +75,23 @@
 export default {
   props: {
     total: {
-      default: "0",
-      type: String,
+      default: 1,
+      type: Number,
     },
     to: {
-      default: "0",
-      type: String,
+      default: 1,
+      type: Number,
     },
     from: {
-      default: "0",
-      type: String,
+      default: 1,
+      type: Number,
+    },
+    currentPage: {
+      default: 1,
+      type: Number,
+    },
+    lastPage: {
+      type: Number,
     },
     loading: {
       default: false,
@@ -63,8 +99,8 @@ export default {
     },
     isPaginated: {
       default: true,
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
     return {

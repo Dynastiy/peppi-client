@@ -9,7 +9,16 @@
     </div>
 
     <div class="lg:tw-mt-16 md:tw-mt-12 tw-mt-8">
-      <products-catalog-header :total="meta.total" :from="meta.from" :to="meta.to" :loading="loading"/>  
+      <products-catalog-header
+        :currentPage="meta.currentPage"
+        :lastPage="meta.lastPage"
+        :total="meta.total"
+        :from="meta.from"
+        :to="meta.to"
+        :loading="loading"
+        @next="nextPage"
+        @prev="prevPage"
+      />
       <hr class="tw-my-8" />
       <b-skeleton-wrapper :loading="loading">
         <template #loading>
@@ -21,10 +30,19 @@
               v-for="item in 6"
               :key="item"
             >
-              <b-skeleton-img width="80%" no-aspect height="250px" style="margin: 10px auto;"></b-skeleton-img>
-              <b-skeleton width="40%" style="margin: 0 auto;"></b-skeleton>
-              <b-skeleton width="40%" style="margin: 10px auto;"></b-skeleton>
-              <b-skeleton width="100%" height="40px" style="margin: 0 auto;  border-radius:0"></b-skeleton>
+              <b-skeleton-img
+                width="80%"
+                no-aspect
+                height="250px"
+                style="margin: 10px auto"
+              ></b-skeleton-img>
+              <b-skeleton width="40%" style="margin: 0 auto"></b-skeleton>
+              <b-skeleton width="40%" style="margin: 10px auto"></b-skeleton>
+              <b-skeleton
+                width="100%"
+                height="40px"
+                style="margin: 0 auto; border-radius: 0"
+              ></b-skeleton>
             </div>
           </div>
         </template>
@@ -39,8 +57,10 @@
             @reloadData="getProducts"
           />
           <div v-if="products.length === 0">
-            <span class="tw-text-red-500 tw-flex tw-items-center tw-font-medium">
-              <i-icon icon="jam:close" width="30px"/>
+            <span
+              class="tw-text-red-500 tw-flex tw-items-center tw-font-medium"
+            >
+              <i-icon icon="jam:close" width="30px" />
               <span>No items Found</span>
             </span>
           </div>
@@ -60,10 +80,13 @@ export default {
       products: [],
       loading: false,
       meta: {
-        total: "",
-        to: "",
-        from: ""
-      }
+        total: null,
+        to: null,
+        from: null,
+        currentPage: null,
+        lastPage: null
+      },
+      page: null
     };
   },
 
@@ -71,25 +94,46 @@ export default {
     getProducts() {
       this.loading = true;
       this.$request
-        .get("products")
+        .get(`products?page=${this.page}`)
         .then((res) => {
           const resPayload = res.data.products;
           console.log(resPayload);
           this.products = resPayload.data;
           this.loading = false;
           this.meta = {
-            to: String(resPayload.to),
-            from: String(resPayload.from),
-            total: String(resPayload.total)
-          }
+            to: resPayload.to,
+            from: resPayload.from,
+            total: resPayload.total,
+            currentPage: resPayload.current_page,
+            lastPage: resPayload.last_page,
+          };
         })
         .catch((err) => {
           console.log(err);
           this.loading = false;
         });
     },
+
+    nextPage(){
+      this.page++
+      this.getProducts()
+    },
+
+    prevPage(){
+      this.page--
+      this.getProducts()
+    }
   },
-  
+
+  watch:{
+    "meta.currentPage":{
+      handler(val){
+        this.page = val
+      },
+      immediate: true
+    }
+  },
+
   beforeMount() {
     this.getProducts();
   },
