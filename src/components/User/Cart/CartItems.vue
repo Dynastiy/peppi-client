@@ -156,28 +156,11 @@ export default {
     },
 
     updateCartItem(e) {
-      // const id = e.id;
-      // let payload = {
-      //   quantity: e.quantity,
-      //   product_id: e.product.product_id,
-      // };
-      // this.$request
-      //   .post(`cart/update/${id}`, payload)
-      //   .then((res) => {
-      //     this.$store.dispatch("cart/getUserCart");
-      //     return res;
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-
       const index = this.cart.findIndex(
         (item) => item.product_id === e.product_id
       );
-      // const quantity = Number(e.quantity);
 
       // Create an updatedItem object with the new values
-      // const cart = this.$store.getters["cart/getCartItems"];
       console.log(this.cart[index], "ommmo");
       var payload = { ...this.cart[index] };
 
@@ -188,18 +171,6 @@ export default {
           this.$emit("reloadData");
         });
     },
-
-    // handleChange (item) {
-    //   item.quantity++
-    //   const formData = new FormData()
-    //   formData.append('quantity', item.quantity)
-    //   const payload = {
-    //     id: item.id,
-    //     payload: formData
-    //   }
-    //   console.log(payload)
-    //   this.$store.dispatch('auth/updateCart', payload)
-    // },
 
     productTotal(e) {
       let result =
