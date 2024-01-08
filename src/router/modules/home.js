@@ -3,6 +3,7 @@ import IndexViewVue from "@/modules/Home/IndexView.vue";
 import TermsAndConditions from "@/modules/Home/TermsAndConditions.vue";
 import PrivacyPolicy from "@/modules/Home/PrivacyPolicy.vue";
 import Careers from "@/modules/Home/CareersPage.vue";
+import AboutUs from "@/modules/Home/AboutUs.vue";
 
 import CartView from "@/modules/Home/CartView.vue";
 import ProductDetails from "@/modules/Home/_id/_uuid.vue"
@@ -201,6 +202,20 @@ const router = [
       parent: "terms-and-conditions",
       name: "terms-and-conditions",
       header: "Terms and Conditions",
+      hasHeader: true,
+      requiresAuth: false,
+    },
+  },
+
+  {
+    path: "/about-us",
+    name: "about-us",
+    component: AboutUs,
+    meta: {
+      layout: "AppHomeLayout",
+      parent: "about-us",
+      name: "about-us",
+      header: "About Us",
       hasHeader: true,
       requiresAuth: false,
     },
